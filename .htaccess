@@ -1,0 +1,91 @@
+Options +FollowSymLinks
+
+RewriteEngine On
+
+RewriteRule ^es/$  							 index.php?identificador=2&languaje=es
+RewriteRule ^en/$  							 index.php?identificador=2&languaje=en
+RewriteRule ^es/Inicio$  					 index.php?identificador=2&languaje=es
+RewriteRule ^en/Inicio$  					 index.php?identificador=2&languaje=en
+
+RewriteRule ^es/nosotros$                       index.php?identificador=3&languaje=es
+RewriteRule ^en/nosotros$                       index.php?identificador=3&languaje=en
+RewriteRule ^es/productos$                      index.php?identificador=4&languaje=es
+RewriteRule ^en/productos$                      index.php?identificador=4&languaje=en
+RewriteRule ^es/cuidados$                       index.php?identificador=5&languaje=es
+RewriteRule ^en/cuidados$                       index.php?identificador=5&languaje=en
+RewriteRule ^es/contacto$                       index.php?identificador=6&languaje=es
+RewriteRule ^en/contacto$                       index.php?identificador=6&languaje=en
+
+RewriteRule ^es/(.*)\_.*._item$                 index.php?identificador=7&id=$1&languaje=es
+RewriteRule ^en/(.*)\_.*._item$                 index.php?identificador=7&id=$1&languaje=en
+RewriteRule ^es/(.*)\_.*._productos$         index.php?identificador=8&id=$1&languaje=es
+RewriteRule ^en/(.*)\_.*._productos$         index.php?identificador=8&id=$1&languaje=en
+RewriteRule ^es/(.*)\_resultado$                index.php?identificador=9&consulta=$1
+RewriteRule ^en/(.*)\_resultado$                index.php?identificador=9&consulta=$1
+
+RewriteRule ^es/(.*)\_.*._producto$          index.php?identificador=10&id=$1&languaje=es
+RewriteRule ^en/(.*)\_.*._producto$          index.php?identificador=10&id=$1&languaje=en
+RewriteRule ^es/(.*)\_.*.categoria$          index.php?identificador=11&id=$1&languaje=es
+RewriteRule ^en/(.*)\_.*.categoria$          index.php?identificador=11&id=$1&languaje=en
+
+
+RewriteRule ^es/addtocart$                   index.php?identificador=200&languaje=es
+RewriteRule ^en/addtocart$                   index.php?identificador=200&languaje=en
+RewriteRule ^emptycart$                      index.php?identificador=201&languaje=es
+RewriteRule ^emptycart$                      index.php?identificador=201&languaje=en
+
+RewriteRule ^es/Revisar_orden$               index.php?identificador=500&languaje=es
+RewriteRule ^en/Revisar_orden$               index.php?identificador=500&languaje=en
+RewriteRule ^es/revisar_orden$               index.php?identificador=500&languaje=es
+RewriteRule ^en/revisar_orden$               index.php?identificador=500&languaje=en
+RewriteRule ^es/Revisar_datos_personales$    index.php?identificador=501&languaje=es
+RewriteRule ^en/Revisar_datos_personales$    index.php?identificador=501&languaje=en
+RewriteRule ^es/revisar_datos_personales$    index.php?identificador=501&languaje=es
+RewriteRule ^en/revisar_datos_personales$    index.php?identificador=501&languaje=en
+RewriteRule ^es/procesar-pedido$             index.php?identificador=502&languaje=es
+RewriteRule ^en/procesar-pedido$             index.php?identificador=502&languaje=en
+RewriteRule ^es/procesar-deposito$           index.php?identificador=502&deposito=1&languaje=es
+RewriteRule ^en/procesar-deposito$           index.php?identificador=502&deposito=1&languaje=en
+
+RewriteRule ^es/(.*)\_(.*)\_.*._compra.html$    index.php?identificador=504&dom=$1&languaje=es
+RewriteRule ^en/(.*)\_(.*)\_.*._compra.html$    index.php?identificador=504&dom=$1&languaje=en
+RewriteRule ^es/(.*)\_.*._pagar$                index.php?identificador=505&idmd5=$1&languaje=es
+RewriteRule ^en/(.*)\_.*._pagar$                index.php?identificador=505&idmd5=$1&languaje=en
+RewriteRule ^es/(.*)\_detalle$                  index.php?identificador=506&idmd5=$1&languaje=es
+RewriteRule ^en/(.*)\_detalle$                  index.php?identificador=506&idmd5=$1&languaje=en
+RewriteRule ^es/(.*)\_orden.pdf$                index.php?identificador=507&idmd5=$1&languaje=es
+RewriteRule ^en/(.*)\_orden.pdf$                index.php?identificador=507&idmd5=$1&languaje=en
+RewriteRule (.*)\_revisar.pdf$              	index.php?identificador=508&idmd5=$1&languaje=es
+RewriteRule ^es/pedido-no-encontrado$           index.php?identificador=509&languaje=es
+RewriteRule ^en/pedido-no-encontrado$           index.php?identificador=509&languaje=en
+RewriteRule ^es/success$                        index.php?identificador=511&languaje=es
+RewriteRule ^en/success$                        index.php?identificador=511&languaje=en
+RewriteRule ^es/(.*)\_IPN$                      index.php?identificador=512&idmd5=$1&languaje=es
+RewriteRule ^en/(.*)\_IPN$                      index.php?identificador=512&idmd5=$1&languaje=en
+
+RewriteRule ^es/Registro$                       index.php?identificador=900&languaje=es
+RewriteRule ^en/Registro$                       index.php?identificador=900&languaje=en
+RewriteRule ^es/Mi-Cuenta$                      index.php?identificador=900&languaje=es
+RewriteRule ^en/Mi-Cuenta$                      index.php?identificador=900&languaje=en
+RewriteRule ^es/mi-cuenta$                      index.php?identificador=900&languaje=es
+RewriteRule ^en/mi-cuenta$                      index.php?identificador=900&languaje=en
+
+RewriteRule ^es/password-recovery$              index.php?identificador=901&languaje=es
+RewriteRule ^en/password-recovery$              index.php?identificador=901&languaje=en
+RewriteRule ^es/(.*)\-password_new$             index.php?identificador=902&id=$1&languaje=es
+RewriteRule ^en/(.*)\-password_new$             index.php?identificador=902&id=$1&languaje=en
+
+RewriteRule ^es/logout$                         index.php?identificador=990&languaje=es
+RewriteRule ^en/logout$                         index.php?identificador=990&languaje=en
+RewriteRule ^es/salir$                          index.php?identificador=991&languaje=es
+RewriteRule ^en/salir$                          index.php?identificador=991&languaje=en
+RewriteRule ^es/googleca2ead9fc0f8cf01.html$    index.php?identificador=995&languaje=es
+RewriteRule ^en/googleca2ead9fc0f8cf01.html$    index.php?identificador=995&languaje=en
+RewriteRule ^es/robots.txt$                     index.php?identificador=996&languaje=es
+RewriteRule ^en/robots.txt$                     index.php?identificador=996&languaje=en
+RewriteRule ^es/sitemap.xml$                    index.php?identificador=997&languaje=es
+RewriteRule ^en/sitemap.xml$                    index.php?identificador=997&languaje=en
+RewriteRule ^es/preguntas-frecuentes$           index.php?identificador=998&languaje=es
+RewriteRule ^en/preguntas-frecuentes$           index.php?identificador=998&languaje=en
+RewriteRule ^es/(.*)\_politicas$                index.php?identificador=999&id=$1&languaje=es
+RewriteRule ^en/(.*)\_politicas$                index.php?identificador=999&id=$1&languaje=en
