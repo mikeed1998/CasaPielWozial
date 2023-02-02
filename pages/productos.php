@@ -236,6 +236,7 @@
 			        <li class="uk-parent">
 			        	<a class="uk-text-uppercase color-grisaceo negritas" href="<?= $value['id'].'_'.$value['txt'.$lng].'_productos'?>"><?=$value['txt'.$lng] ?></a>
 			        	<ul class="uk-nav-sub">
+							<li class="uk-text-uppercase color-grisaceo">Todos</li>
 			        		<?php  foreach ($value['subcategorias'] as $key => $val):  ?>
 				       			 <li><a class="uk-text-uppercase color-grisaceo" href="<?=$val['id'].'_'.$val['txt'.$lng].'_productos' ?>"><?= $val['txt'.$lng] ?></a></li>
 				       		<?php endforeach ?>
