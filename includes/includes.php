@@ -373,6 +373,7 @@
 			<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700&display=swap" rel="stylesheet">
 			<link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700&display=swap" rel="stylesheet">
 			<link rel="stylesheet"      href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
+			<script src="https://kit.fontawesome.com/910783a909.js" crossorigin="anonymous"></script>
 
 
 			<!-- jQuery is required -->

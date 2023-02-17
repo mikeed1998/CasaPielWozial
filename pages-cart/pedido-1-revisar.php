@@ -1,6 +1,41 @@
 <?php
 $requiereFactura=(isset($_SESSION['requierefactura']))?$_SESSION['requierefactura']:0;
 $requiereFacturaIcon=(isset($_SESSION['requierefactura']) AND $_SESSION['requierefactura']==1)?'fas fa-check color-verde':'far fa-square uk-text-muted';
+
+$descuentoCupon=0;
+$descuentoCuponTxt='';
+
+if (isset($_SESSION['cupon'])) {
+  $cupon=$_SESSION['cupon'];
+  $CONSULTA= $CONEXION -> query("SELECT * FROM cupones WHERE codigo = '$cupon'");
+  $numCupones=$CONSULTA->num_rows;
+  if ($numCupones>0) {
+    $rowCONSULTA = $CONSULTA -> fetch_assoc();
+    $descuentoCupon=$rowCONSULTA['descuento'];
+    $descuentoCuponTxt=$rowCONSULTA['txt'];
+  }
+  $cuponForm='';
+  
+}else{
+  $cuponForm='
+  <div class="uk-width-1-1 margin-v-20">
+    <div uk-grid class="uk-grid-small uk-flex-center">
+      <div>
+        <div style="padding-top:8px;">
+          ¿Tienes un cupón de descuento?
+        </div>
+      </div>
+      <div>
+        <input class="uk-input" id="cuponinput" placeholder="Ingresa tu cupón">
+      </div>
+      <div>
+        <span class="uk-button uk-button-default" id="cuponavalidar">Validar cupón</span>
+      </div>
+    </div>
+  </div>';
+}
+
+
 ?>
 <!DOCTYPE html>
 <?=$headGNRL?>
@@ -233,6 +268,23 @@ $requiereFacturaIcon=(isset($_SESSION['requierefactura']) AND $_SESSION['requier
       
       <div class="uk-width-1-1 uk-text-center margen-v-50">
         <div uk-grid class="uk-flex-center">
+          <div class="uk-width-1-1 margin-v-20">
+            <div uk-grid class="uk-grid-small uk-flex-center">
+              <div>
+                <div style="padding-top:8px;">
+                  ¿Tienes un cupón de descuento?
+                </div>
+              </div>
+              <div>
+                <input class="uk-input" id="cuponinput" placeholder="Ingresa tu cupón">
+              </div>
+              <div>
+                <span class="uk-button uk-button-default" id="cuponavalidar">Validar cupón</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div uk-grid class="uk-flex-center">
           <div>
             <a href="productos" class="uk-button uk-button-large uk-button-default"><i uk-icon="icon:arrow-left;ratio:1.5;"></i> &nbsp; '.$btnText1.'</a>
           </div>
@@ -405,6 +457,28 @@ $requiereFacturaIcon=(isset($_SESSION['requierefactura']) AND $_SESSION['requier
     $("#actualizar").removeClass("uk-hidden");
     $("#siguiente").addClass("uk-hidden");
   })
+
+  $("#cuponavalidar").click(function(){
+    var cupon = $("#cuponinput").val();
+    $.ajax({
+      method: "POST",
+      url: "includes/acciones.php",
+      data: {
+        cuponaplicar: cupon
+      }
+    })
+    .done(function( response ) {
+      console.log( response );
+      datos = JSON.parse( response );
+      UIkit.notification.closeAll();
+      UIkit.notification(datos.msj);
+      if(datos.estatus==0){
+        setTimeout(function(){
+          location.reload();
+        },2000);
+      }
+    });
+  });
 </script>
 </body>
 </html>

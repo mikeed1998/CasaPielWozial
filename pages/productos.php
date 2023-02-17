@@ -10,7 +10,7 @@
 	
 	/// ingles y español
 	if ($languaje == 'es') {
-		   
+		$btnTodos = 'Todos';
 	    $bottonText = 'Ver detalles';
 	  	$lng="";
 	  	$filterText="FILTROS";
@@ -19,7 +19,7 @@
 	 	$warningText = "Lo sentimos no hay productos de esta categoría.";
 	    
 	}elseif ($languaje == 'en') {
-	    
+	    $btnTodos = 'All';
 	    $bottonText = 'See more';
 	 	$lng="_en";
 	 	$filterText="FILTERS";
@@ -236,7 +236,7 @@
 			        <li class="uk-parent">
 			        	<a class="uk-text-uppercase color-grisaceo negritas" href="<?= $value['id'].'_'.$value['txt'.$lng].'_productos'?>"><?=$value['txt'.$lng] ?></a>
 			        	<ul class="uk-nav-sub">
-							<li class="uk-text-uppercase color-grisaceo">Todos</li>
+							<li class="uk-text-uppercase color-grisaceo"><a href="<?= $value['id'].'_'.$value['txt'.$lng].'_producto'?>"><?=$btnTodos?></a></li>
 			        		<?php  foreach ($value['subcategorias'] as $key => $val):  ?>
 				       			 <li><a class="uk-text-uppercase color-grisaceo" href="<?=$val['id'].'_'.$val['txt'.$lng].'_productos' ?>"><?= $val['txt'.$lng] ?></a></li>
 				       		<?php endforeach ?>
