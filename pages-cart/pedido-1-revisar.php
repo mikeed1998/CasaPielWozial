@@ -79,7 +79,51 @@ if (isset($_SESSION['cupon'])) {
   
   //echo '<div class="padding-v-20 bg-dark color-blanco">'.$carroTotalProds.'</div>';
   if ($carroTotalProds>0) {
+    $desccc = 0;
     echo '
+      
+      <div class="uk-width-1-1 uk-text-center margen-v-50">
+        <div uk-grid class="uk-flex-center">
+          <div class="uk-width-1-1 margin-v-20">
+            <div uk-grid class="uk-grid-small uk-flex-center">
+            ';
+            
+            echo '
+              <form action="" method="post">
+                <div>
+                  <div style="padding-top:8px;">
+                    ¿Tienes un cupón de descuento?
+                  </div>
+                </div>
+                <div>
+                  <input class="uk-input" id="cuponinput" name="cuponinput" placeholder="Ingresa tu cupón">
+                </div>
+                <div>
+                  <input name="subir" type="submit" class="uk-button uk-button-default" id="cuponavalidar" value="Validar cupon">
+                </div>
+              </form>
+              ';
+        
+              // echo htmlspecialchars($_POST['cuponinput']);
+              if(isset($_POST['subir'])) {
+                $flag = 0;
+                $conCup = $CONEXION->query("SELECT * FROM cupones");
+                while($rowCup = $conCup->fetch_assoc()) {
+                  if($rowCup['codigo'] == $_POST['cuponinput']) {
+                    $flag = 1;
+                    $idAux = $rowCup['id'];
+                    echo "EL CUPON ES VALIDO, APLICA DESCUENTO DEL ". $rowCup['descuento'] .'%';
+                    $desccc = $rowCup['descuento'];
+                    $actualizar_contador = $CONEXION->query("UPDATE cupones SET usos = usos + 1 WHERE id = $idAux");
+                    break;
+                  } 
+                  $flag = 0;
+                }
+                if($flag == 0) {
+                  echo "CUPON NO VALIDO, NO SE APLICARA EL DESCUENTO";
+                }
+
+                echo '
     <form method="post">
       <input type="hidden" name="actualizarcarro" value="1">
 
@@ -137,7 +181,7 @@ if (isset($_SESSION['cupon'])) {
 
                 $link=$prodId.'_'.urlencode(str_replace($caracteres_no_validos,$caracteres_si_validos,html_entity_decode(strtolower($rowCONSULTA['titulo'])))).'-.html';
 
-                $importe=($precio*$aumementoPrecio*(100-$rowCONSULTA['descuento'])/100)*$key['Cantidad']*$aumementoPrecio;
+                $importe=($precio*$aumementoPrecio*(100-$desccc)/100)*$key['Cantidad']*$aumementoPrecio;
                 $subtotal+=$importe;
 
                 echo '
@@ -161,7 +205,7 @@ if (isset($_SESSION['cupon'])) {
                     '.number_format(($precio*$aumementoPrecio),2).'
                   </td>
                   <td class="uk-text-right@m uk-visible@m">
-                    '.number_format(($precio*$aumementoPrecio*(100-$rowCONSULTA['descuento'])/100),2).'
+                    '.number_format(($precio*$aumementoPrecio*(100-$desccc)/100),2).'
                   </td>
                   <td class="uk-text-right@m">
                     '.number_format($importe,2).'
@@ -265,47 +309,7 @@ if (isset($_SESSION['cupon'])) {
 
         </div>
       </div>
-      
-      <div class="uk-width-1-1 uk-text-center margen-v-50">
-        <div uk-grid class="uk-flex-center">
-          <div class="uk-width-1-1 margin-v-20">
-            <div uk-grid class="uk-grid-small uk-flex-center">
-            ';
-            
-            echo '
-              <form action="" method="post">
-                <div>
-                  <div style="padding-top:8px;">
-                    ¿Tienes un cupón de descuento?
-                  </div>
-                </div>
-                <div>
-                  <input class="uk-input" id="cuponinput" name="cuponinput" placeholder="Ingresa tu cupón">
-                </div>
-                <div>
-                  <input name="subir" type="submit" class="uk-button uk-button-default" id="cuponavalidar" value="Validar cupon">
-                </div>
-              </form>
-              ';
-        
-              // echo htmlspecialchars($_POST['cuponinput']);
-              if(isset($_POST['subir'])) {
-                $flag = 0;
-                $conCup = $CONEXION->query("SELECT * FROM cupones");
-                while($rowCup = $conCup->fetch_assoc()) {
-                  if($rowCup['codigo'] == $_POST['cuponinput']) {
-                    $flag = 1;
-                    $idAux = $rowCup['id'];
-                    echo "EL CUPON ES VALIDO, APLICA DESCUENTO DEL ". $rowCup['descuento'] .'%';
-                    $actualizar_contador = $CONEXION->query("UPDATE cupones SET usos = usos + 1 WHERE id = $idAux");
-                    break;
-                  } 
-                  $flag = 0;
-                }
-                if($flag == 0) {
-                  echo "CUPON NO VALIDO, NO SE APLICARA EL DESCUENTO";
-                }
-              }
+            '; }
 
           
               echo '
