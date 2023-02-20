@@ -1,3 +1,8 @@
+<!-- mensaje toatr -->
+<link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+<script src="plugins/toastr/toastr.min.js" ></script>
+<!-- mensaje toatr -->
+
 <?php
 	$tabla='cupones';
 
@@ -46,7 +51,7 @@ echo '
 					echo '
 					<tr id="row'.$id.'">
 						<td class="uk-text-left">
-							<span class="uk-hidden@m uk-text-muted">Códogo: </span>
+							<span class="uk-hidden@m uk-text-muted">Código: </span>
 							<input class="editarajax uk-input uk-form-small uk-form-blank" type="text" data-tabla="'.$tabla.'" data-campo="codigo" data-id="'.$id.'" value="'.$codigo.'">
 						</td>
 						<td class="uk-text-left">
@@ -70,7 +75,8 @@ echo '
 							<i class="estatuschange pointer fas fa-lg fa-toggle-'.$estatusIcon.'" data-tabla="'.$tabla.'" data-campo="estatus" data-id="'.$id.'" data-valor="'.$estatus.'"></i>
 						</td>
 						<td class="uk-text-nowrap">
-							<a href="javascript:eliminargeneral('.$id.',\'productosmarcas\')" class="borrar color-red" uk-icon="trash"></a>
+							<!-- <a href="javascript:eliminargeneral('.$id.',\'productosmarcas\')" class="borrar color-red" uk-icon="trash"></a> -->
+                            <button onclick="eliminarC('.$id.')" id="bc" class="borrar color-red" uk-icon="trash"></button>
 							<!--
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<a href="index.php?rand='.rand(1,1000).'&modulo='.$seccion.'&archivo=cuponedetalle&id='.$id.'" class="uk-text-primary" uk-icon="search"></a>
@@ -88,12 +94,13 @@ echo '
 	<input type="hidden" id="fichaid">';
 
 // MODAL NUEVO
+    
 	echo '
 	<div id="add" uk-modal class="modal">
 		<div class="uk-modal-dialog uk-modal-body">
 			<button class="uk-modal-close-default" type="button" uk-close></button>
 			<h4>Nuevo cupón</h4>
-			<form action="index.php" method="post">
+			<form action="" method="post">
 				<input type="hidden" name="nuevocupon" value="1">
 				<input type="hidden" name="modulo" value="'.$seccion.'">
 				<input type="hidden" name="archivo" value="'.$subseccion.'">
@@ -102,30 +109,30 @@ echo '
 					<div class="uk-width-1-1">
 						<label>
 							Código
-							<input type="text" name="codigo" class="uk-input" required>
+							<input type="text" id="codigo" name="codigo" class="uk-input" required>
 						<label>
 					</div>
 					<div class="uk-width-1-1">
 						<label>
 							Descripción
-							<input type="text" name="txt" class="uk-input" required>
+							<input type="text" id="txt" name="txt" class="uk-input" required>
 						<label>
 					</div>
 					<div class="uk-width-1-1">
 						<label>
 							Descuento
-							<input type="text" name="descuento" class="uk-input input-number descuento" required>
+							<input type="text" id="descuento" name="descuento" class="uk-input input-number descuento" required>
 						<label>
 					</div>
 					<div class="uk-width-1-1">
 						<label>
 							Vigencia
-							<input type="date" name="vigencia" class="uk-input" required>
+							<input type="date" id="vigencia" name="vigencia" class="uk-input" required>
 						<label>
 					</div>
 					<div class="uk-width-1-1 uk-text-center">
 						<a href="#" class="uk-button uk-button-white uk-button-large uk-modal-close" tabindex="10">Cancelar</a>
-						<button class="uk-button uk-button-primary uk-button-large" type="submit">Agregar</button>
+						<button onclick="agregarC()" class="uk-button uk-button-primary uk-button-large">Agregar</button>
 					</div>
 				</div>
 			</form>
@@ -133,7 +140,55 @@ echo '
 	</div>
 	';
 
+   
 $scripts='
+
+    function agregarC() {
+        var codigo = document.getElementById("codigo").value;
+        var txt = document.getElementById("txt").value;
+        var descuento = document.getElementById("descuento").value;
+        var vigencia = document.getElementById("vigencia").value;
+
+        //var URLactual = window.location.origin;
+	    //var UrlAjax = URLactual+"/tiendaNaturista/includes/widgets.php";
+	    var UrlAjax = "modulos/configuracion/acciones.php";
+		    $.ajax({
+    		url : UrlAjax,
+	    	type : "POST",
+		    dataType : "html",
+	    	data : {codigo: codigo, txt: txt, descuento: descuento, vigencia: vigencia}
+	    })
+        .done(function(resultado){
+            if(resultado == 1){
+            toastr["success"]("Cupón agregado exitosamente", "Nuevo cupón");
+            setTimeout(function () { location.reload(); }, 2500);
+            }else{
+                toastr["error"]("Error eliminar ", "Fallo");
+            }
+        })
+    }
+
+    function eliminarC(id) {
+        var id_cupon = id;
+	
+	    //var URLactual = window.location.origin;
+	    //var UrlAjax = URLactual+"/tiendaNaturista/includes/widgets.php";
+        var UrlAjax = "modulos/configuracion/acciones.php";
+    		$.ajax({
+	    	url : UrlAjax,
+		    type : "POST",
+    		dataType : "html",
+	    	data : {id_cupon: id_cupon},
+	    })
+	    .done(function(resultado){
+		    if(resultado == 1){
+	    	    setTimeout(function () { location.reload(); }, 2500);
+		    }else{
+	    	}
+	    })
+	}
+   
+
 	// Elimina general
 	function eliminargeneral (id,tabla) { 
 		UIkit.modal.confirm("Realmente desea borrar esto?").then(function() {

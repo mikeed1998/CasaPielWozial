@@ -35,7 +35,7 @@ if (isset($_SESSION['cupon'])) {
   </div>';
 }
 
-
+  
 ?>
 <!DOCTYPE html>
 <?=$headGNRL?>
@@ -270,19 +270,41 @@ if (isset($_SESSION['cupon'])) {
         <div uk-grid class="uk-flex-center">
           <div class="uk-width-1-1 margin-v-20">
             <div uk-grid class="uk-grid-small uk-flex-center">
-              <div>
-                <div style="padding-top:8px;">
-                  ¿Tienes un cupón de descuento?
+            ';
+            
+            echo '
+              <form action="" method="post">
+                <div>
+                  <div style="padding-top:8px;">
+                    ¿Tienes un cupón de descuento?
+                  </div>
                 </div>
-              </div>
-              <div>
-                <input class="uk-input" id="cuponinput" placeholder="Ingresa tu cupón">
-              </div>
-              <div>
-                <span class="uk-button uk-button-default" id="cuponavalidar">Validar cupón</span>
-              </div>
+                <div>
+                  <input class="uk-input" id="cuponinput" name="cuponinput" placeholder="Ingresa tu cupón">
+                </div>
+                <div>
+                  <input name="subir" type="submit" class="uk-button uk-button-default" id="cuponavalidar" value="Validar cupon">
+                </div>
+              </form>
+              ';
+        
+              // echo htmlspecialchars($_POST['cuponinput']);
+              if(isset($_POST['subir'])) {
+                $conCup = $CONEXION->query("SELECT * FROM cupones");
+                while($rowCup = $conCup->fetch_assoc()) {
+                  if($rowCup['codigo'] == $_POST['cuponinput']) {
+                    echo "EL CUPON ES VALIDO, APLICA DESCUENTO DEL ". $rowCup['descuento'] .'%';
+                    break;
+                  } 
+                }
+              }
+
+          
+              echo '
             </div>
           </div>
+        </div>
+        <div uk-grid class="uk-flex-center">
         </div>
         <div uk-grid class="uk-flex-center">
           <div>
@@ -366,6 +388,29 @@ if (isset($_SESSION['cupon'])) {
 <?=$footer?>
 
 <?=$scriptGNRL?>
+
+<!-- <script>
+  function va_cupon() {
+    var cupon = document.getElementById("cuponinput").value;
+    
+    console.log(cupon);
+
+    var UrlAjax = "acciones.php";
+		$.ajax({
+		  url : UrlAjax,
+  		type : 'POST',
+	    dataType : 'html',
+    	data : {cupon: cupon},
+	  })
+	  .done(function(resultado){
+      console.log("dsggggggggggggg");
+	    if(resultado == 1){
+		    setTimeout(function () { location.reload(); }, 2500);
+		  }else{
+	    } 
+  	})
+  }
+</script> -->
 
 <script type="text/javascript">
    $('#factura').click(function(){

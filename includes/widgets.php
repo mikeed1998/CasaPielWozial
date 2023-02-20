@@ -468,7 +468,15 @@
       mysqli_free_result($CAROUSEL);
     }
 
-
+    function hola() {
+      if(isset($_POST['fo1'])) {
+        echo "<script>alert('entrastes');</script>";
+      }
+      // global $CONEXION;
+      // $CONSULTA1 = $CONEXION -> query("SELECT * FROM cupones WHERE id = 1");
+      // $row_CONSULTA1 = $CONSULTA1 -> fetch_assoc();
+      // echo $row_CONSULTA1['descuento'];
+    }
 
 
 // ITEM                   

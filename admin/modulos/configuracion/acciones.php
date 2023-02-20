@@ -276,7 +276,22 @@
 	}
 
 
+	// Agregar cupón
+	if(isset($_POST['codigo'])) {
+        $codigo = $_POST['codigo'];
+        $txt = $_POST['txt'];
+        $descuento = $_POST['descuento'];
+        $vigencia = $_POST['vigencia'];
 
+        $agregar = $CONEXION->query("INSERT INTO cupones(codigo, txt, descuento, vigencia, usos, estatus) VALUES ('$codigo', '$txt', '$descuento', '$vigencia', 0, 1)");
+    }
+
+	if(isset($_POST['id_cupon'])) {
+		$id_c = $_POST['id_cupon'];
+		$eliminacion = "DELETE FROM cupones WHERE id = '$id_c'";
+	}
+
+	// Eliminar cupón
 
 
 

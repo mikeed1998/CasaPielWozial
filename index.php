@@ -266,6 +266,7 @@ switch ($identificador) {
 			include 'pages-cart/pedido-7-ipn.php';
 			break;
 
+
 	case 900:
 		include "includes/includes.php";
 		if (isset($uid)) {

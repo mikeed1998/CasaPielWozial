@@ -375,6 +375,10 @@
 			<link rel="stylesheet"      href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
 			<script src="https://kit.fontawesome.com/910783a909.js" crossorigin="anonymous"></script>
 
+			<!-- mensaje toatr -->
+			<link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+			<script src="plugins/toastr/toastr.min.js" ></script>
+			<!-- mensaje toatr -->
 
 			<!-- jQuery is required -->
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
