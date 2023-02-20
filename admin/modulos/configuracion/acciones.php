@@ -287,8 +287,14 @@
     }
 
 	if(isset($_POST['id_cupon'])) {
+		include '../../../includes/connection.php';
 		$id_c = $_POST['id_cupon'];
 		$eliminacion = "DELETE FROM cupones WHERE id = '$id_c'";
+		if (mysqli_query($CONEXION, $eliminacion)) {
+				echo "1";
+			  } else {
+					echo "0";		
+			  }
 	}
 
 	// Eliminar cupón

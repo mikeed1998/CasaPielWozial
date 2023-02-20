@@ -170,6 +170,8 @@ $scripts='
 
     function eliminarC(id) {
         var id_cupon = id;
+
+        
 	
 	    //var URLactual = window.location.origin;
 	    //var UrlAjax = URLactual+"/tiendaNaturista/includes/widgets.php";
@@ -181,8 +183,9 @@ $scripts='
 	    	data : {id_cupon: id_cupon},
 	    })
 	    .done(function(resultado){
-		    if(resultado == 1){
-	    	    setTimeout(function () { location.reload(); }, 2500);
+            console.log(resultado);
+		    if(resultado = 1){
+	    	    setTimeout(function () { location.reload(); }, 500);
 		    }else{
 	    	}
 	    })
