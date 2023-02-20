@@ -290,12 +290,20 @@ if (isset($_SESSION['cupon'])) {
         
               // echo htmlspecialchars($_POST['cuponinput']);
               if(isset($_POST['subir'])) {
+                $flag = 0;
                 $conCup = $CONEXION->query("SELECT * FROM cupones");
                 while($rowCup = $conCup->fetch_assoc()) {
                   if($rowCup['codigo'] == $_POST['cuponinput']) {
+                    $flag = 1;
+                    $idAux = $rowCup['id'];
                     echo "EL CUPON ES VALIDO, APLICA DESCUENTO DEL ". $rowCup['descuento'] .'%';
+                    $actualizar_contador = $CONEXION->query("UPDATE cupones SET usos = usos + 1 WHERE id = $idAux");
                     break;
                   } 
+                  $flag = 0;
+                }
+                if($flag == 0) {
+                  echo "CUPON NO VALIDO, NO SE APLICARA EL DESCUENTO";
                 }
               }
 
