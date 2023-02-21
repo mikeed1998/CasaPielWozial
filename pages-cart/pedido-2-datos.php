@@ -223,7 +223,10 @@ if ( $languaje == 'es') {
               '.$row_USER['cp2'].'
             </div>
           </div-->
-          <?php if ($_SESSION['requierefactura']==1):?>
+
+
+
+          <!-- <?php if ($_SESSION['requierefactura']==1):?>
             <div>
                <div>
                 <h2><?= $pDomicilio  ?></h2>
@@ -265,8 +268,10 @@ if ( $languaje == 'es') {
                 <input type="text" data-campo="cpfiscal" value="<?=$row_USER['cpfiscal']?>" class="editarinfopersonalinput uk-input uk-input-grey" >
               </div>
             </div>
-          <?php endif ?>
+          <?php endif ?> -->
 
+
+          
         </div>
       </div>
     </div>
