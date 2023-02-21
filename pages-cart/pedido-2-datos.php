@@ -9,6 +9,7 @@ $requiereFacturaIcon=(isset($_SESSION['requierefactura']) AND $_SESSION['requier
 
 $rfccorrecto=($_SESSION['requierefactura']==1 AND strlen($row_USER['rfc']) < 5)?'uk-hidden':'';
 
+$desccc = $_SESSION['descuento'];
 
 if ( $languaje == 'es') {
   $titleText ="Productos y cantidades";
@@ -316,7 +317,8 @@ if ( $languaje == 'es') {
 
               $link=$prodId.'_'.urlencode(str_replace($caracteres_no_validos,$caracteres_si_validos,html_entity_decode(strtolower($row_CONSULTA1['titulo'])))).'-.html';
 
-              $importe=($precio*$aumementoPrecio*(100-$row_CONSULTA1['descuento'])/100)*$key['Cantidad']*$aumementoPrecio;
+              // $importe=($precio*$aumementoPrecio*(100-$row_CONSULTA1['descuento'])/100)*$key['Cantidad']*$aumementoPrecio;
+              $importe=($precio*$aumementoPrecio*(100-$desccc)/100)*$key['Cantidad']*$aumementoPrecio;
               $subtotal+=$importe;
 
               echo '
@@ -326,7 +328,6 @@ if ( $languaje == 'es') {
                 </td>
                 <td>
                   '.$talla.'
-                </td>
                 <td>
                   '.$colorName.'
                 </td>
@@ -337,7 +338,7 @@ if ( $languaje == 'es') {
                   '.number_format(($precio*$aumementoPrecio),2).'
                 </td>
                 <td class="uk-text-right">
-                  '.number_format(($precio*$aumementoPrecio*(100-$row_CONSULTA1['descuento'])/100),2).'
+                  '.number_format(($precio*$aumementoPrecio*(100-$desccc)/100),2).'
                 </td>
                 <td class="uk-text-right">
                   '.number_format($importe,2).'

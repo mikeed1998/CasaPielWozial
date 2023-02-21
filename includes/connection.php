@@ -85,6 +85,8 @@
 	// Metadatos
 		$CONSULTA          = $CONEXION -> query("SELECT * FROM configuracion WHERE id = 1");
 		$row_CONSULTA      = $CONSULTA -> fetch_assoc();
+		$desccc = 0;
+		
 
 		$title		       = $row_CONSULTA['title'];
 		$description       = $row_CONSULTA['description'];

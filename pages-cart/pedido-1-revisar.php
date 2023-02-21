@@ -43,7 +43,6 @@
   
   			//echo '<div class="padding-v-20 bg-dark color-blanco">'.$carroTotalProds.'</div>';
   			if ($carroTotalProds>0) {
-   	 			$desccc = 0;
     			echo '
       				<div class="uk-width-1-1 uk-text-center margen-v-50">
         				<div uk-grid class="uk-flex-center">
@@ -52,7 +51,7 @@
 				';
 
             	echo '
-              		<form action="" method="post">
+              		<form action="" method="post" class="barra_cupon">
                 		<div>
                   			<div style="padding-top:8px;">
 			                    ¿Tienes un cupón de descuento?
@@ -63,28 +62,39 @@
                 		</div>
                 		<div>
                   			<input name="subir" type="submit" class="uk-button uk-button-default" id="cuponavalidar" value="Validar cupon">
+							<input name="negar" type="submit" class="uk-button uk-button-default" id="cuponnegar" value="Continuar sin cupon">
                 		</div>
               		</form>
+					</div>
               	';
         
               	// echo htmlspecialchars($_POST['cuponinput']);
-              	if(isset($_POST['subir'])) {
+              	if(isset($_POST['subir']) || isset($_POST['negar'])) {
                 	$flag = 0;
                 	$conCup = $CONEXION->query("SELECT * FROM cupones");
                 	while($rowCup = $conCup->fetch_assoc()) {
                   		if($rowCup['codigo'] == $_POST['cuponinput']) {
                     		$flag = 1;
                     		$idAux = $rowCup['id'];
-                    		echo "EL CUPON ES VALIDO, APLICA DESCUENTO DEL ". $rowCup['descuento'] .'%';
+                    		echo '
+								<div uk-grid class="uk-grid-small uk-flex-center uk-background-muted uk-text-bolder">
+									El cupón es valido, aplica descuento del '. $rowCup['descuento'] .'%
+								</p>
+							';
                     		$desccc = $rowCup['descuento'];
                     		$actualizar_contador = $CONEXION->query("UPDATE cupones SET usos = usos + 1 WHERE id = $idAux");
+							$_SESSION['descuento'] = $desccc;
                     		break;
                   		}       		
 						$flag = 0;
          	       	}
                 	
 				   	if($flag == 0) {
-                  		echo "CUPON NO VALIDO, NO SE APLICARA EL DESCUENTO";
+                  		echo '
+						  	<div uk-grid class="uk-grid-small uk-flex-center uk-background-muted uk-text-bolder">
+								<p class="py-0">Cupón no valido, no se aplicará el descuento</p>
+							</p>
+						';
                 	}
 
                 echo '
@@ -378,6 +388,15 @@
   	})
   }
 </script> -->
+
+  	<script type="text/javascript">
+		// $('#cuponnegar').click(function(){
+		// 	$('.barra_cupon').hide();
+		// 	$('.barra_cupon').submit(function(e){
+		// 		e.preventDefault();
+		// 	});
+		// });
+	</script>
 
 	<script type="text/javascript">
    		$('#factura').click(function(){
