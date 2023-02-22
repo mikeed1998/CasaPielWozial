@@ -266,6 +266,21 @@ switch ($identificador) {
 			include 'pages-cart/pedido-7-ipn.php';
 			break;
 
+		case 513:
+			include "includes/includes.php";
+			include 'pages-cart/proceso_compra.php';
+			break;
+
+		case 514:
+			include "includes/includes.php";
+			include 'pages-cart/envio_pago.php';
+			break;
+
+		case 515:
+			include "includes/includes.php";
+			include 'pages-cart/pago.php';
+			break;
+
 
 	case 900:
 		include "includes/includes.php";

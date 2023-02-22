@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<?=$headGNRL?>
-<body>
-<?=$header?>
+<?php   
+     if(isset($_POST['precio_final'])) {
+        $precio_final = $_POST['precio_final'];
+        echo $precio_final;
+    }
 
-<?php
-    
-?>
-
-<?=$footer?>
-   
-<?=$scriptGNRL?>
-    
-</body>
-</html>

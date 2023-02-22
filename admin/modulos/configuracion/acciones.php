@@ -283,9 +283,17 @@
         $descuento = $_POST['descuento'];
         $vigencia = $_POST['vigencia'];
 
-        $agregar = $CONEXION->query("INSERT INTO cupones(codigo, txt, descuento, vigencia, usos, estatus) VALUES ('$codigo', '$txt', '$descuento', '$vigencia', 0, 1)");
+        // $agregar = $CONEXION->query("INSERT INTO cupones(codigo, txt, descuento, vigencia, usos, estatus) VALUES ('$codigo', '$txt', '$descuento', '$vigencia', 0, 1)");
+		$agregar = "INSERT INTO cupones(codigo, txt, descuento, vigencia, usos, estatus) VALUES ('$codigo', '$txt', '$descuento', '$vigencia', 0, 1)";
+
+		if(mysqli_query($CONEXION, $agregar)) {
+			echo "1";
+		} else {
+			echo "0";
+		}
     }
 
+	// Eliminar cupón
 	if(isset($_POST['id_cupon'])) {
 		include '../../../includes/connection.php';
 		$id_c = $_POST['id_cupon'];
@@ -296,9 +304,6 @@
 					echo "0";		
 			  }
 	}
-
-	// Eliminar cupón
-
 
 
 // *****************************

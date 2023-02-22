@@ -163,7 +163,7 @@ $scripts='
             toastr["success"]("Cupón agregado exitosamente", "Nuevo cupón");
             setTimeout(function () { location.reload(); }, 2500);
             }else{
-                toastr["error"]("Error eliminar ", "Fallo");
+                toastr["error"]("Error, no se pudo crear el cupon ", "Fallo");
             }
         })
     }

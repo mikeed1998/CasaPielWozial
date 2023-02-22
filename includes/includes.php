@@ -19,7 +19,8 @@
 		$rutaInicio			=	'Inicio';
 		$rutaNosotros		=	'nosotros';
 		$rutaTienda			=	'productos';
-		$rutaPedido			=	$ruta.'Revisar_orden';
+		// $rutaPedido			=	$ruta.'Revisar_orden';
+		$rutaPedido			=	$ruta.'ProcesoCompra';
 		$rutaCuidados		=	'cuidados';
 		$rutaContacto		=	'contacto';
 
@@ -376,8 +377,8 @@
 			<script src="https://kit.fontawesome.com/910783a909.js" crossorigin="anonymous"></script>
 
 			<!-- mensaje toatr -->
-			<link rel="stylesheet" href="plugins/toastr/toastr.min.css">
-			<script src="plugins/toastr/toastr.min.js" ></script>
+			<link rel="stylesheet" href="../library/toastr/toastr.min.css">
+			<script src="../library/toastr/toastr.min.js" ></script>
 			<!-- mensaje toatr -->
 
 			<!-- jQuery is required -->
