@@ -181,7 +181,7 @@
 			<div class="uk-cover-container uk-transition-toggle" style="height: 120px"  tabindex="0">
 				
 				<div class="uk-flex uk-flex-center uk-flex-middle" uk-cover>
-					<div class="text-xxl color-primary uk-text-uppercase filtros-letras">
+					<div class="text-xxl uk-text-uppercase filtros-letras text-dark">
 						<?= $option?>
 					</div>
 				</div>
@@ -236,7 +236,7 @@
 			        <li class="uk-parent">
 			        	<a class="uk-text-uppercase color-grisaceo negritas" href="<?= $value['id'].'_'.$value['txt'.$lng].'_productos'?>"><?=$value['txt'.$lng] ?></a>
 			        	<ul class="uk-nav-sub">
-							<li class="uk-text-uppercase color-grisaceo"><a href="<?= $value['id'].'_'.$value['txt'.$lng].'_producto'?>"><?=$btnTodos?></a></li>
+							<li class="uk-text-uppercase color-grisaceo"><a href="<?= $value['id'].'_'.$value['txt'.$lng].'_producto'?>" style="text-color: black;"><?=$btnTodos?></a></li>
 			        		<?php  foreach ($value['subcategorias'] as $key => $val):  ?>
 				       			 <li><a class="uk-text-uppercase color-grisaceo" href="<?=$val['id'].'_'.$val['txt'.$lng].'_productos' ?>"><?= $val['txt'.$lng] ?></a></li>
 				       		<?php endforeach ?>
@@ -278,7 +278,7 @@
 
 				            </div>
 						
-			            <div class="uk-card-body uk-text-center padding-10 color-primary">
+			            <div class="uk-card-body uk-text-center padding-10 text-dark">
 		            	 	<hr class="uk-divider-small">
 		            		<p class="uk-text-uppercase negritas"><?= $productos[$i]['titulo'] ?></p>
 		                	<p> <?= $productos[$i]['precio'] ?></p>

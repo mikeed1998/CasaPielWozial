@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <?=$headGNRL?>
-<style >
+	
 
 
 </style>
 
 <body>
+
 
 	<?php
 
@@ -341,7 +342,7 @@
 
 					<div class="uk-width-1-1@m padding-5 uk-padding-small margin-v-5">
 						<a href="cuidados">
-							<div class="bg-primary color-blanco uk-text-center text-11" style="padding: 16px;"><?= $btnCuidadosText  ?></div>
+							<div class="color-blanco uk-text-center text-11" style="padding: 16px; background: #7f5739;"><?= $btnCuidadosText  ?></div>
 						</a>
 					</div>
 

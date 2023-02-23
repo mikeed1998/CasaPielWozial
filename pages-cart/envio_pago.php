@@ -92,8 +92,14 @@
     }
 
 ?>
+
 <!DOCTYPE html>
 <?=$headGNRL?>
+    
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://js.openpay.mx/openpay.v1.min.js"></script>
+    <script type='text/javascript' src="https://js.openpay.mx/openpay-data.v1.min.js"></script>
 <body>
   
 <?=$header?>
@@ -110,6 +116,7 @@
 
     <div class="uk-container <?=$rfccorrecto?> margin-top-50">
         <div class="uk-width-1-1">
+        <form action="Pagar" method="POST">
             <div id="revisardatos">
                 <div>
                     <p class="text-xl uk-text-center"><?= $titulo  ?> &nbsp; 
@@ -123,15 +130,15 @@
                     </div>
                     <div>
                         <label for="nombre" class="uk-form-label uk-text-capitalize"><?= $inputText1 ?></label>
-                        <input type="text" data-campo="nombre" id="nombre" value="<?=$row_USER['nombre']?>" class="uk-input uk-input-grey">
+                        <input type="text" name="nombre" data-campo="nombre" id="nombre" value="<?=$row_USER['nombre']?>" class="uk-input uk-input-grey">
                     </div>
                     <div>
                         <label for="email" class="uk-form-label uk-text-capitalize"><?= $inputText2 ?></label>
-                        <input type="text" data-campo="email" id="email" value="<?=$row_USER['email']?>" class="uk-input uk-input-grey">
+                        <input type="text" name="email" data-campo="email" id="email" value="<?=$row_USER['email']?>" class="uk-input uk-input-grey">
                     </div>
                     <div>
                         <label for="telefono" class="uk-form-label uk-text-capitalize"><?= $inputText3 ?></label>
-                        <input type="text" data-campo="telefono" id="telefono" value="<?=$row_USER['telefono']?>" class="uk-input uk-input-grey">
+                        <input type="text" name="telefono" data-campo="telefono" id="telefono" value="<?=$row_USER['telefono']?>" class="uk-input uk-input-grey">
                     </div>
                     <div>
                         <label for="rfc" class="uk-form-label uk-text-uppercase"><?= $inputText5  ?></label>
@@ -349,9 +356,13 @@
         <div uk-grid class="uk-child-width-1-1@m">
             <div class="uk-text-center@m uk-text-center">
                 <button data-enlace="procesar-deposito" class="siguiente uk-button uk-button-personal uk-hidden">Proceder al pago</button>
-                <button onclick="agregarProductoFinal()" class="siguientefalso uk-button uk-button-personal">Proceder al pago</button>
+                <button onclick="" id="bta" class="siguientefalso uk-button uk-button-personal">Proceder al pago</button>
             </div>
         </div>
+        
+                    <input type="hidden" value="Pago productos" name="descripcion_pago">
+                    <input type="submit">
+        </form>
     </div>';
 ?>
 
@@ -360,22 +371,23 @@
 <?=$footer?>
 <?=$scriptGNRL?>
 
-<script>
+<script >
+    $('#bta').click(function() {
+        var $nombre         = document.getElementById("nombre").value;
+        var $email          = document.getElementById("email").value;
+        var $telefono       = document.getElementById("telefono").value;
+        var $rfc            = document.getElementById("rfc").value;
+        var $calle          = document.getElementById("calle").value;
+        var $numeroE        = document.getElementById("numeroE").value;
+        var $numeroI        = document.getElementById("numeroI").value;
+        var $pais           = document.getElementById("pais").value;
+        var $estado         = document.getElementById("estado").value;
+        var $municipio      = document.getElementById("municipio").value;
+        var $colonia        = document.getElementById("colonia").value;
+        var $cp             = document.getElementById("cp").value;
+        var $precio_final   = document.getElementById("precio_total").value;
 
-    function agregarProductoFinal() {
-        $nombre         = document.getElementById("nombre").value;
-        $email          = document.getElementById("email").value;
-        $telefono       = document.getElementById("telefono").value;
-        $rfc            = document.getElementById("rfc").value;
-        $calle          = document.getElementById("calle").value;
-        $numeroE        = document.getElementById("numeroE").value;
-        $numeroI        = document.getElementById("numeroI").value;
-        $pais           = document.getElementById("pais").value;
-        $estado         = document.getElementById("estado").value;
-        $municipio      = document.getElementById("municipio").value;
-        $colonia        = document.getElementById("colonia").value;
-        $cp             = document.getElementById("cp").value;
-        $precio_final   = document.getElementById("precio_total").value;
+        console.log("precio_final");
 
         var UrlAjax = "../pages-cart/pago.php";
 		$.ajax({
@@ -397,6 +409,8 @@
                 cp:             cp,
                 precio_final:   precio_final
             }
+
+            
 	    })
         .done(function(resultado){
             if(resultado == 1){
@@ -406,26 +420,29 @@
                 toastr["error"]("Error, no se pudo crear el cupon ", "Fallo");
             }
         })
+    });
+    function agregarProductoFinal() {
+        
     }
 
 
-  $('.siguiente').click(function(){
-    var datos = $(this).data();
-      $('#spinner').css('top','0');
-      UIkit.scroll(this).scrollTo('#tabla');
-      window.location = (datos.enlace);
-  });
+    $('.siguiente').click(function(){
+        var datos = $(this).data();
+        $('#spinner').css('top','0');
+        UIkit.scroll(this).scrollTo('#tabla');
+        window.location = (datos.enlace);
+    });
 
-  <?php  
-    if ($_SESSION['requierefactura']==1 AND strlen($row_USER['rfc']) < 5) {
-      echo 'UIkit.modal("#rfcmodal").show();
-
-          UIkit.util.on("#rfcmodal", "hide", function () {
-            location.reload();
-          }); ';
-
-    }
-  ?>
+    <?php  
+        if ($_SESSION['requierefactura']==1 AND strlen($row_USER['rfc']) < 5) {
+            echo '
+                UIkit.modal("#rfcmodal").show();
+                UIkit.util.on("#rfcmodal", "hide", function () {
+                    location.reload();
+                }); 
+            ';
+        }
+    ?>
 
   $(".editarinfopersonalinput").focusout(function() {
     var campo = $(this).attr("data-campo");
@@ -483,7 +500,6 @@
 
     });
   });
-
 
   UIkit.util.on('#editarinfopersonalmodal', 'hidden', function () {
     location.reload();

@@ -106,7 +106,7 @@
 						<div class="uk-width-1-2@m  uk-width-1-2@l padding-5 uk-visible@m">
 							<div uk-grid style="margin-left: 0;" class="uk-flex uk-flex-right">
 								<div class="uk-width-1-1@s uk-width-1-4@m uk-flex uk-flex-middle uk-flex-right">
-									<div class="margin-5 color-primary text-lg">
+									<div class="margin-5 text-lg" style="">
 						    		<a class="uk-link-reset" id="idioma" href="../'.$langNew.'/" style="text-transform: uppercase;">
 						    			'.$languajeText.'
 										<span class="uk-icon uk-icon-image" 
@@ -115,7 +115,7 @@
 						    		</a>
 							    </div>
 								</div>
-								<div class="uk-width-1-1@s uk-width-3-4@m bg-primary padding-5 color-blanco ">
+								<div class="uk-width-1-1@s uk-width-3-4@m padding-5 color-blanco" style="background: #7f5739;">
 									<div class="uk-grid-small uk-flex uk-flex-center uk-flex-middle" uk-grid>
 										<div class="margin-h-5 text-9">
 										Tel. '.$telefono.'
@@ -215,7 +215,7 @@
 	$footer = '
 		<footer>
 			<div class="bg-footer" style="z-index: 0;">
-				<div class="uk-container uk-container-large uk-position-relative uk-width-1-1@s bg-secondary">	
+				<div class="uk-container uk-container-large uk-position-relative uk-width-1-1@s" style="background: black;">	
 					<div class="uk-container uk-container-small margin-top-50">
 						<div uk-grid style="margin-left:0;" class="margin-top-5">
 							<div class="uk-width-1-2@m">
@@ -384,9 +384,14 @@
 			<!-- jQuery is required -->
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+			<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
 			<!-- UIkit JS -->
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/'.$uikitVersion.'/js/uikit.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/'.$uikitVersion.'/js/uikit-icons.min.js"></script>
+
+			<!-- OpenPay -->
 		</head>';
 
 
