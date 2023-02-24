@@ -24,6 +24,7 @@
         echo 'Precio Total: ' . $_POST['precio_total'] . '<br>';
         echo 'Descripción del pago: ' . $_POST['descripcion_pago'] . '<br>';
 		echo 'Descuento del ' . $_SESSION['descuento'] . '%<br>';
+		echo ''
     ?>
 
     <div class="container py-5 d-flex justify-content-center">				
@@ -121,8 +122,6 @@
 
 			console.log(response.data);
             $('#payment-form').submit();
-
-
 		};
 
 		var error_callbak = function(response) {
@@ -131,6 +130,14 @@
 			//console.log(response);
 
 			switch(response.data.error_code){
+				case 1001:
+					Swal.fire({
+						position: 'center',
+						icon: 'error',
+						title: 'Fecha de expiracion caduca',
+						showConfirmButton: false,
+					})
+					break;
 				case 2004:
 					Swal.fire({
 						position: 'center',
@@ -147,14 +154,6 @@
 						showConfirmButton: false,
 					})
 					break;
-				case 1001:
-					Swal.fire({
-						position: 'center',
-						icon: 'error',
-						title: 'Fecha de expiracion caduca',
-						showConfirmButton: false,
-					})
-					break;
 				case 2006:
 					Swal.fire({
 						position: 'center',
@@ -163,6 +162,46 @@
 						showConfirmButton: false,
 					})
 					break;
+				case 3001:
+					Swal.fire({
+						position: 'center',
+						icon: 'error',
+						title: 'La tarjeta fue rechazada',
+						showConfirmButton: false,
+					})
+					break;
+				case 3002:
+					Swal.fire({
+						position: 'center',
+						icon: 'error',
+						title: 'La tarjeta ha expirado',
+						showConfirmButton: false,
+					})
+					break; 
+				case 3003:
+					Swal.fire({
+						position: 'center',
+						icon: 'info',
+						title: 'La tarjeta no tiene fondos suficientes.',
+						showConfirmButton: false,
+					})
+					break;
+				case 3004:
+					Swal.fire({
+						position: 'center',
+						icon: 'info',
+						title: 'La tarjeta ha sido identificada como una tarjeta robada.',
+						showConfirmButton: false,
+					})
+					break;
+				case 3005:
+					Swal.fire({
+						position: 'center',
+						icon: 'error',
+						title: 'La tarjeta ha sido rechazada por el sistema antifraudes.',
+						showConfirmButton: false,
+					})
+					break;  
 			}
  		   	
 			//  var desc = response.data.description != undefined ?

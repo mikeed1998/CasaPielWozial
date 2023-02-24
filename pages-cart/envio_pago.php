@@ -242,6 +242,14 @@
 
                                 echo $ejeFina1 . '<br>';
 
+                                echo '<input type="hidden" name="producto_id" id="producto_id" value="'.$prodId.'"/>';
+                                echo '<input type="hidden" name="item_id" id="item_id" value="'.$itemId.'"/>';
+                                echo '<input type="hidden" name="producto_descripcion" id="producto_descripcion" value="'.$textDesc.'"/>';
+                                echo '<input type="hidden" name="precio_indv" id="precio_indv" value="'.$precio.'"/>';
+                                echo '<input type="hidden" name="importe" id="importe" value="'.$importe.'"/>';
+                               
+                                $sqlAx = "INSERT INTO pedidosdetalle (pedido,producto,item,productotxt,cantidad,precio,importe) VALUES ('$prodId', '$itemId', '$textDesc', '1', '$precio', '$importe')";
+                                $subcategoria_query = $CONEXION->query($sqlAx);
 
                                 echo '
                                     <tr>
