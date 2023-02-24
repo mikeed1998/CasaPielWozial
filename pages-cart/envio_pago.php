@@ -119,9 +119,12 @@
         <form action="Pagar" method="POST">
             <div id="revisardatos">
                 <div>
-                    <p class="text-xl uk-text-center"><?= $titulo  ?> &nbsp; 
+                    <p class="text-xl uk-text-center"> <?= $titulo  ?> &nbsp; 
                 </p>
             </div>
+
+            <input type="hidden" name="usu_id" data-campo="usu_id" id="nombre" value="<?=$row_USER['id']?>" class="uk-input uk-input-grey">
+            <input type="hidden" name="cupon" data-campo="cupon" id="cupon" value="<?$desccc?>">
 
             <div class="uk-child-width-1-2@m" uk-grid>
                 <div>
@@ -233,6 +236,12 @@
                                 // $importe=($precio*$aumementoPrecio*(100-$row_CONSULTA1['descuento'])/100)*$key['Cantidad']*$aumementoPrecio;
                                 $importe=($precio*$aumementoPrecio*(100-$desccc)/100)*$key['Cantidad']*$aumementoPrecio;
                                 $subtotal+=$importe;
+
+                                $ejeFina1 = $row_USER['id'] .' * '.  $prodId .' * '. $itemId .' * '. $row_CONSULTA1['sku'].' | '.$row_CONSULTA1['titulo']. ' | ' . $talla.' | '.$colorName .' * '. $precio .' * '. $importe;
+                                $textDesc =$row_CONSULTA1['sku'].' | '.$row_CONSULTA1['titulo']. ' | ' . $talla.' | '.$colorName;
+
+                                echo $ejeFina1 . '<br>';
+
 
                                 echo '
                                     <tr>
@@ -372,58 +381,58 @@
 <?=$scriptGNRL?>
 
 <script >
-    $('#bta').click(function() {
-        var $nombre         = document.getElementById("nombre").value;
-        var $email          = document.getElementById("email").value;
-        var $telefono       = document.getElementById("telefono").value;
-        var $rfc            = document.getElementById("rfc").value;
-        var $calle          = document.getElementById("calle").value;
-        var $numeroE        = document.getElementById("numeroE").value;
-        var $numeroI        = document.getElementById("numeroI").value;
-        var $pais           = document.getElementById("pais").value;
-        var $estado         = document.getElementById("estado").value;
-        var $municipio      = document.getElementById("municipio").value;
-        var $colonia        = document.getElementById("colonia").value;
-        var $cp             = document.getElementById("cp").value;
-        var $precio_final   = document.getElementById("precio_total").value;
+    // $('#bta').click(function() {
+    //     var $nombre         = document.getElementById("nombre").value;
+    //     var $email          = document.getElementById("email").value;
+    //     var $telefono       = document.getElementById("telefono").value;
+    //     var $rfc            = document.getElementById("rfc").value;
+    //     var $calle          = document.getElementById("calle").value;
+    //     var $numeroE        = document.getElementById("numeroE").value;
+    //     var $numeroI        = document.getElementById("numeroI").value;
+    //     var $pais           = document.getElementById("pais").value;
+    //     var $estado         = document.getElementById("estado").value;
+    //     var $municipio      = document.getElementById("municipio").value;
+    //     var $colonia        = document.getElementById("colonia").value;
+    //     var $cp             = document.getElementById("cp").value;
+    //     var $precio_final   = document.getElementById("precio_total").value;
 
-        console.log("precio_final");
+    //     console.log("precio_final");
 
-        var UrlAjax = "../pages-cart/pago.php";
-		$.ajax({
-    		url : UrlAjax,
-	    	type : "POST",
-		    dataType : "html",
-	    	data : {
-                nombre:         nombre, 
-                email:          email, 
-                telefono:       telefono, 
-                rfc:            rfc,
-                calle:          calle,
-                numeroE:        numeroE,
-                numeroI:        numeroI,
-                pais:           pais,
-                estado:         estado,
-                municipio:      municipio,
-                colonia:        colonia,
-                cp:             cp,
-                precio_final:   precio_final
-            }
+    //     var UrlAjax = "../pages-cart/pago.php";
+	// 	$.ajax({
+    // 		url : UrlAjax,
+	//     	type : "POST",
+	// 	    dataType : "html",
+	//     	data : {
+    //             nombre:         nombre, 
+    //             email:          email, 
+    //             telefono:       telefono, 
+    //             rfc:            rfc,
+    //             calle:          calle,
+    //             numeroE:        numeroE,
+    //             numeroI:        numeroI,
+    //             pais:           pais,
+    //             estado:         estado,
+    //             municipio:      municipio,
+    //             colonia:        colonia,
+    //             cp:             cp,
+    //             precio_final:   precio_final
+    //         }
 
             
-	    })
-        .done(function(resultado){
-            if(resultado == 1){
-            toastr["success"]("Cupón agregado exitosamente", "Nuevo cupón");
-            setTimeout(function () { location.reload(); }, 2500);
-            }else{
-                toastr["error"]("Error, no se pudo crear el cupon ", "Fallo");
-            }
-        })
-    });
-    function agregarProductoFinal() {
+	//     })
+    //     .done(function(resultado){
+    //         if(resultado == 1){
+    //         toastr["success"]("Cupón agregado exitosamente", "Nuevo cupón");
+    //         setTimeout(function () { location.reload(); }, 2500);
+    //         }else{
+    //             toastr["error"]("Error, no se pudo crear el cupon ", "Fallo");
+    //         }
+    //     })
+    // });
+    // function agregarProductoFinal() {
         
-    }
+    // }
 
 
     $('.siguiente').click(function(){

@@ -6,18 +6,34 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
 <body>
 <?=$header?>
+	<?php
+		$id_usu = $_POST['usu_id'];
+		$nombre = $_POST['nombre'];
+		$email = $_POST['email'];
+		$telefono = $_POST['telefono'];
+		$precio_total = $_POST['precio_total'];
+		$descripcion_pago = $_POST['descripcion_pago'];
+		$descuento = $_SESSION['descuento'];
+	?>
   
     <?php
+		echo "ID: " . $_POST['usu_id'] . '<br>';
         echo 'Nombre: ' . $_POST['nombre'] . '<br>'; 
         echo 'Correo: ' . $_POST['email'] . '<br>';
         echo 'Telefono: ' . $_POST['telefono'] . '<br>';
         echo 'Precio Total: ' . $_POST['precio_total'] . '<br>';
         echo 'Descripción del pago: ' . $_POST['descripcion_pago'] . '<br>';
+		echo 'Descuento del ' . $_SESSION['descuento'] . '%<br>';
     ?>
 
-    <div class="container d-flex justify-content-center">				
-		<form class="col-8" action="#" method="POST" id="payment-form">
+    <div class="container py-5 d-flex justify-content-center">				
+		<form class="col-8" action="AccionesPago" method="POST" id="payment-form">
 		    <input type="hidden" name="token_id" id="token_id">
+			<input type="hidden" name="nombre" id="nombre" value="<?php echo $nombre;?>">
+			<input type="hidden" name="email" id="email" value="<?php echo $email;?>">
+			<input type="hidden" name="telefono" id="telefono" value="<?php echo $telefono;?>">
+			<input type="hidden" name="precio_total" id="precio_total" value="<?php echo $precio_total;?>">
+			<input type="hidden" name="descripcion_pago" id="descripcion_pago" value="<?php echo $descripcion_pago;?>">
 			<input type="hidden" name="use_card_points" id="use_card_points" value="false">
 		    <div class="pymnt-itm card  active" style="border-radius:16px; background:#f7f7f7;">
 			    <div class="card-header " style="background:#e8e8e8;">
@@ -83,68 +99,79 @@
             </div>
 		</form>
 	</div>
+	
+	<script type="text/javascript">
+	 	$(document).ready(function() {
+  			OpenPay.setId('mqq6zbbrv6kqpilztchv');
+  			OpenPay.setApiKey('pk_f2c3003e1aab4048a7880a6fdd308abf');
+  			OpenPay.setSandboxMode(true);
+  			var deviceSessionId = OpenPay.deviceData.setup("payment-form", "deviceIdHiddenFieldName");
+  			console.log(deviceSessionId);
+  		});
 
+  		$('#pay-button').on('click', function(event) {
+      	 	event.preventDefault();
+       		$("#pay-button").prop( "disabled", true);
+       		OpenPay.token.extractFormAndCreate('payment-form', success_callbak, error_callbak);              
+		});
+
+		var success_callbak = function(response) {
+            var token_id = response.data.id;
+            $('#token_id').val(token_id);
+
+			console.log(response.data);
+            $('#payment-form').submit();
+
+
+		};
+
+		var error_callbak = function(response) {
+    		console.log(response.data);
+    		var desc = response.data.description != undefined ? response.data.description : response.message;
+			//console.log(response);
+
+			switch(response.data.error_code){
+				case 2004:
+					Swal.fire({
+						position: 'center',
+						icon: 'info',
+						title: 'Numero de tarjeta invalido',
+						showConfirmButton: false,
+					})
+					break;
+				case 2005:
+					Swal.fire({
+						position: 'center',
+						icon: 'error',
+						title: 'Fecha de expiracion caduca',
+						showConfirmButton: false,
+					})
+					break;
+				case 1001:
+					Swal.fire({
+						position: 'center',
+						icon: 'error',
+						title: 'Fecha de expiracion caduca',
+						showConfirmButton: false,
+					})
+					break;
+				case 2006:
+					Swal.fire({
+						position: 'center',
+						icon: 'info',
+						title: 'Se requiere el código de seguridad CVV2',
+						showConfirmButton: false,
+					})
+					break;
+			}
+ 		   	
+			//  var desc = response.data.description != undefined ?
+    		//     response.data.description : response.message;
+    		//  alert("ERROR [" + response.status + "] " + desc);
+    		//  $("#pay-button").prop("disabled", false);
+		};
+    </script>
 <?=$footer?>
 <?=$scriptGNRL?>
-    <script type="text/javascript">
- $(document).ready(function() {
-  OpenPay.setId('mqq6zbbrv6kqpilztchv');
-  OpenPay.setApiKey('pk_f2c3003e1aab4048a7880a6fdd308abf');
-  OpenPay.setSandboxMode(true);
-  var deviceSessionId = OpenPay.deviceData.setup("payment-form", "deviceIdHiddenFieldName");
-  console.log(deviceSessionId);
-  });
-
-  $('#pay-button').on('click', function(event) {
-       event.preventDefault();
-       $("#pay-button").prop( "disabled", true);
-       OpenPay.token.extractFormAndCreate('payment-form', success_callbak, error_callbak);              
-});
-
-var success_callbak = function(response) {
-              var token_id = response.data.id;
-              $('#token_id').val(token_id);
-            //   $('#payment-form').submit();
-};
-
-var error_callbak = function(response) {
-
-    console.log(response.data);
-    var desc = response.data.description != undefined ?
-        response.data.description : response.message;
-		//console.log(response);
-
-		switch(response.data.error_code){
-			case 2004:
-				Swal.fire({
-			position: 'center',
-			icon: 'info',
-			title: 'Numero de tarjeta invalido',
-			showConfirmButton: false,
-			})
-			break;
-			case 2005:
-				Swal.fire({
-			position: 'center',
-			icon: 'error',
-			title: 'Fecha de expiracion caduca',
-			showConfirmButton: false,
-			})
-			break;
-			case 2006:
-				Swal.fire({
-			position: 'center',
-			icon: 'info',
-			title: 'Se requiere el código de seguridad CVV2',
-			showConfirmButton: false,
-			})
-			break;
-		}
-    //  var desc = response.data.description != undefined ?
-    //     response.data.description : response.message;
-    //  alert("ERROR [" + response.status + "] " + desc);
-    //  $("#pay-button").prop("disabled", false);
-};
-    </script>
 </body>
 </html>

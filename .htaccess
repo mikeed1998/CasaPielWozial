@@ -68,6 +68,8 @@ RewriteRule ^es/EnvioPago$                      index.php?identificador=514&lang
 RewriteRule ^en/EnvioPago$                      index.php?identificador=514&languaje=en
 RewriteRule ^es/Pagar$                          index.php?identificador=515&languaje=es
 RewriteRule ^en/Pagar$                          index.php?identificador=515&languaje=en
+RewriteRule ^en/AccionesPago$                   index.php?identificador=516&languaje=es
+RewriteRule ^es/AccionesPago$                   index.php?identificador=516&languaje=es
 
 RewriteRule ^es/Registro$                       index.php?identificador=900&languaje=es
 RewriteRule ^en/Registro$                       index.php?identificador=900&languaje=en
