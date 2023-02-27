@@ -19,8 +19,9 @@
 		$rutaInicio			=	'Inicio';
 		$rutaNosotros		=	'nosotros';
 		$rutaTienda			=	'productos';
-		// $rutaPedido			=	$ruta.'Revisar_orden';
-		$rutaPedido			=	$ruta.'ProcesoCompra';
+		$opcionPedido 		= 	'OpcionPago';
+		$rutaPedido			=	$ruta.'Revisar_orden';
+		$rutaPedido2        = 	$ruta.'ProcesoCompra';
 		$rutaCuidados		=	'cuidados';
 		$rutaContacto		=	'contacto';
 
@@ -283,7 +284,7 @@
 
 		<div id="cotizacion-fixed" class="uk-position-top uk-height-viewport '.$stickerClass.'">
 			<div>
-				<a href="'.$rutaPedido.'"><img src="../img/design/checkout.png"></a>
+				<a href="'.$opcionPedido.'"><img src="../img/design/checkout.png"></a>
 			</div>
 		</div>
 

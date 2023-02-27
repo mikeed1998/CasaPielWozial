@@ -3,6 +3,28 @@
 <body>
 
     <?php
+        $usu_id = $_POST['usu_id'];
+		$nombre = $_POST['nombre'];
+		$email = $_POST['email'];
+		$telefono = $_POST['telefono'];
+		$precio_total = $_POST['precio_total'];
+		$descripcion_pago = $_POST['descripcion_pago'];
+		$descuento = $_SESSION['descuento'];
+		$producto_id = $_POST['producto_id'];
+		$item_id = $_POST['item_id'];
+		// $p_d = $_POST['producto_descripcion'];
+		// $p_i = $_POST['precio_indv'];
+		// $importe = $_POST['importe'];
+		$calle = $_POST['calle'];
+		$noexterior = $_POST['noexterior'];
+		$nointerior = $_POST['nointerior'];
+		$pais = $_POST['pais'];
+		$estado = $_POST['estado'];
+		$municipio = $_POST['municipio'];
+		$colonia = $_POST['colonia'];
+		$cp = $_POST['cp'];
+        $cantidad = $_POST['cantidad'];
+
         if(isset($_POST['token_id'])){
 
             // require_once '../includes/connection.php';
@@ -42,14 +64,20 @@
             $charge = $openpay->charges->create($chargeData);
         
             if($charge->status == "completed"){
-                $u = $_POST['email']; 
-                $d = $_POST['descripcion_pago'];
-                $t = $_POST['precio_total'];
-
-                $open = "INSERT INTO historial_pagos(usuario, descripcion, total) VALUES ('$u', '$d', '$t')";
-
-                if (mysqli_query($CONEXION, $open)) {
-                    echo "completed";
+                $registrarPago = "INSERT INTO `pedidost`(`idmd5`, `uid`,     `nombre`,  `email`,  `estatus`,   `invisible`, `notify`, `guia`, `fecha`, `dom`, `factura`, `tabla`, `cantidad`,  `importe`,       `envio`, `comprobante`, `imagen`, `ipn`, `calle`, `noexterior`, `nointerior`, `entrecalles`, `pais`, `estado`, `municipio`, `colonia`, `cp`) 
+                                               VALUES   ('',      '$usu_id', '$nombre', '$email', '',          '',          '',       '',     '$ahora',      '',    '',        '',      '$cantidad', '$precio_total', '',      '',            '',       '',    '$calle','$noexterior','$nointerior','',            '$pais','$estado','$municipio','$colonia','$cp')";
+                // mysqli_query($CONEXION, $registrarPago) or die(mysqli_error($CONEXION));
+                
+                if (mysqli_query($CONEXION, $registrarPago)) {
+                    echo '
+                        <div class="container mt-5 mb-5 py-5">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="alert alert-success"><strong>Success!</strong> Pago realizado con exito, regresando a la página principal.</div>
+                                </div>
+                            </div>
+                        </div>
+                    ';
                 } else {
                     echo "error";
                 }
@@ -70,6 +98,13 @@
     ?>
 
 <?=$scriptGNRL?>
+<script>
+    $(document).ready(function(){
+        setTimeout(function() {
+            window.location.href = "<?=$rutaInicio?>"
+        }, 5000);
+    });
+</script>
 </body>
 </html>
 

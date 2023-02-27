@@ -70,6 +70,8 @@ RewriteRule ^es/Pagar$                          index.php?identificador=515&lang
 RewriteRule ^en/Pagar$                          index.php?identificador=515&languaje=en
 RewriteRule ^en/AccionesPago$                   index.php?identificador=516&languaje=es
 RewriteRule ^es/AccionesPago$                   index.php?identificador=516&languaje=es
+RewriteRule ^es/OpcionPago$                     index.php?identificador=517&languaje=es
+RewriteRule ^en/OpcionPago$                     index.php?identificador=517&languaje=en
 
 RewriteRule ^es/Registro$                       index.php?identificador=900&languaje=es
 RewriteRule ^en/Registro$                       index.php?identificador=900&languaje=en

@@ -154,35 +154,35 @@
                     </div>
                     <div>
                         <label for="calle" class="uk-form-label uk-text-capitalize"><?= $calle  ?></label>
-                        <input type="text" data-campo="calle" id="calle" value="<?=$row_USER['calle']?>" class="uk-input uk-input-grey" >
+                        <input type="text" data-campo="calle" name="calle" id="calle" value="<?=$row_USER['calle']?>" class="uk-input uk-input-grey" >
                     </div>
                     <div>
                         <label for="noexterior" class="uk-form-label uk-text-capitalize"><?= $noExterior ?></label>
-                        <input type="text" data-campo="noexterior" id="noexterior" value="<?=$row_USER['noexterior']?>" class="uk-input uk-input-grey" >
+                        <input type="text" data-campo="noexterior" name="noexterior" id="noexterior" value="<?=$row_USER['noexterior']?>" class="uk-input uk-input-grey" >
                     </div>
                     <div>
                         <label for="nointerior" class="uk-form-label uk-text-capitalize"><?= $noInterior ?></label>
-                        <input type="text" data-campo="nointerior" id="nointerior" value="<?=$row_USER['nointerior']?>" class="uk-input uk-input-grey">
+                        <input type="text" data-campo="nointerior" name="nointerior" id="nointerior" value="<?=$row_USER['nointerior']?>" class="uk-input uk-input-grey">
                     </div>
                     <div>
                         <label for="pais" class="uk-form-label uk-text-capitalize"><?= $pais  ?></label>
-                        <input type="text" readonly value="México" id="pais" class="uk-input uk-input-grey" >
+                        <input type="text" readonly value="México" name="pais" id="pais" class="uk-input uk-input-grey" >
                     </div>
                     <div>
                         <label for="estado" class="uk-form-label uk-text-capitalize"><?=$estado  ?></label>
-                        <input type="text" data-campo="estado" id="estado" value="<?=$row_USER['estado']?>" class="uk-input uk-input-grey" >
+                        <input type="text" data-campo="estado" name="estado" id="estado" value="<?=$row_USER['estado']?>" class="uk-input uk-input-grey" >
                     </div>
                     <div>
                         <label for="municipio" class="uk-form-label uk-text-capitalize"><?= $municipio ?></label>
-                        <input type="text" data-campo="municipio" id="municipio" value="<?=$row_USER['municipio']?>" class="uk-input uk-input-grey" >
+                        <input type="text" data-campo="municipio" name="municipio" id="municipio" value="<?=$row_USER['municipio']?>" class="uk-input uk-input-grey" >
                     </div>
                     <div>
                         <label for="colonia" class="uk-form-label uk-text-capitalize"><?= $colonia  ?></label>
-                        <input type="text" data-campo="colonia" id="colonia" value="<?=$row_USER['colonia']?>" class="uk-input uk-input-grey" >
+                        <input type="text" data-campo="colonia" name="colonia" id="colonia" value="<?=$row_USER['colonia']?>" class="uk-input uk-input-grey" >
                     </div>
                     <div>
                         <label for="cp" class="uk-form-label uk-text-uppercase"><?= $cp ?></label>
-                        <input type="text" data-campo="cp" id="cp" value="<?=$row_USER['cp']?>" class="uk-input uk-input-grey" >
+                        <input type="text" data-campo="cp" name="cp" id="cp" value="<?=$row_USER['cp']?>" class="uk-input uk-input-grey" >
                     </div>
                 </div>
             </div>
@@ -207,10 +207,12 @@
                     <?php
                         $subtotal=0;
                         $num=0;
+                        $acuCantidad = 0;
                         
                         if(isset($_SESSION['carro'])) {
                             foreach ($arreglo as $key) {
                                 $itemId=$key['Id'];
+                                $acuCantidad += $key['Cantidad'];
                                 $CONSULTA0 = $CONEXION -> query("SELECT * FROM productosexistencias WHERE id = $itemId");
                                 $row_CONSULTA0 = $CONSULTA0 -> fetch_assoc();
                                 $prodId=$row_CONSULTA0['producto'];
@@ -248,13 +250,14 @@
                                 echo '<input type="hidden" name="precio_indv" id="precio_indv" value="'.$precio.'"/>';
                                 echo '<input type="hidden" name="importe" id="importe" value="'.$importe.'"/>';
                                
-                                $sqlAx = "INSERT INTO pedidosdetalle (pedido,producto,item,productotxt,cantidad,precio,importe) VALUES ('$prodId', '$itemId', '$textDesc', '1', '$precio', '$importe')";
-                                $subcategoria_query = $CONEXION->query($sqlAx);
+                               
+                                // $sqlAx = "INSERT INTO pedidosdetalle (pedido,producto,item,productotxt,cantidad,precio,importe) VALUES ('$prodId', '$itemId', '$textDesc', '1', '$precio', '$importe')";
+                                // $subcategoria_query = $CONEXION->query($sqlAx);
 
                                 echo '
                                     <tr>
                                         <td>
-                                            <a href="'.$link.'" target="_blank">'.$producto.'</a>
+                                            <a href="'.$link.'" target="_blank" class="text-dark">'.$producto.'</a>
                                         </td>
                                         <td>
                                             '.$talla.'
@@ -284,8 +287,10 @@
                         $subtotal=$subtotal+$envio+$shippingGlobal;
                         $iva=($taxIVA>0)?$subtotal*$taxIVA:0;
                         $total=$subtotal+$iva;
-          
+                        $cantidadP = $acuCantidad;
+
                         echo '<input type="hidden" name="precio_total" id="precio_total" value="'.$total.'"/>';
+                        echo '<input type="hidden" name="cantidad" id="cantidad" value="'.$cantidadP.'"/>';
 
                         if ($total>0) {
                             if ($shippingGlobal>0) {
@@ -372,13 +377,16 @@
     <div class="uk-width-1-1 uk-text-center padding-v-50">
         <div uk-grid class="uk-child-width-1-1@m">
             <div class="uk-text-center@m uk-text-center">
+                <!--
                 <button data-enlace="procesar-deposito" class="siguiente uk-button uk-button-personal uk-hidden">Proceder al pago</button>
                 <button onclick="" id="bta" class="siguientefalso uk-button uk-button-personal">Proceder al pago</button>
+                -->
+                <input type="hidden" value="Pago productos" name="descripcion_pago">
+                <input type="submit" class="siguientefalso uk-button uk-button-personal" value="Proceder al pago">
             </div>
         </div>
         
-                    <input type="hidden" value="Pago productos" name="descripcion_pago">
-                    <input type="submit">
+                    
         </form>
     </div>';
 ?>

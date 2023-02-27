@@ -7,34 +7,76 @@
 <body>
 <?=$header?>
 	<?php
-		$id_usu = $_POST['usu_id'];
+		$usu_id = $_POST['usu_id'];
 		$nombre = $_POST['nombre'];
 		$email = $_POST['email'];
 		$telefono = $_POST['telefono'];
 		$precio_total = $_POST['precio_total'];
 		$descripcion_pago = $_POST['descripcion_pago'];
 		$descuento = $_SESSION['descuento'];
+		$producto_id = $_POST['producto_id'];
+		$item_id = $_POST['item_id'];
+		// $p_d = $_POST['producto_descripcion'];
+		// $p_i = $_POST['precio_indv'];
+		// $importe = $_POST['importe'];
+		$calle = $_POST['calle'];
+		$noexterior = $_POST['noexterior'];
+		$nointerior = $_POST['nointerior'];
+		$pais = $_POST['pais'];
+		$estado = $_POST['estado'];
+		$municipio = $_POST['municipio'];
+		$colonia = $_POST['colonia'];
+		$cp = $_POST['cp'];
+		$cantidad = $_POST['cantidad'];
 	?>
   
     <?php
-		echo "ID: " . $_POST['usu_id'] . '<br>';
+		echo "ID: " . $usu_id . '<br>';
         echo 'Nombre: ' . $_POST['nombre'] . '<br>'; 
         echo 'Correo: ' . $_POST['email'] . '<br>';
         echo 'Telefono: ' . $_POST['telefono'] . '<br>';
         echo 'Precio Total: ' . $_POST['precio_total'] . '<br>';
         echo 'Descripción del pago: ' . $_POST['descripcion_pago'] . '<br>';
 		echo 'Descuento del ' . $_SESSION['descuento'] . '%<br>';
-		echo ''
+		echo 'ID producto: '. $producto_id .'<br>';
+		echo 'ID item: '. $item_id .'<br>';
+		// echo 'Descripcion producto: '. $p_d .'<br>';
+		// echo 'Precio Original: '. $p_i .'<br>';
+		// echo 'Importe: '. $importe .'<br>';
+		echo 'Calle: '. $calle .'<br>';
+		echo 'NOEX: '. $noexterior .'<br>';
+		echo 'NOIN: '. $nointerior .'<br>';
+		echo 'Pais: '. $pais .'<br>';
+		echo 'Estado: '. $estado .'<br>';
+		echo 'Municipio: '. $municipio .'<br>';
+		echo 'Colonia: '. $colonia .'<br>';
+		echo 'CP: '. $cp .'<br>';
+		echo 'Cantidad de productos: '. $cantidad .'<br>';
     ?>
 
     <div class="container py-5 d-flex justify-content-center">				
 		<form class="col-8" action="AccionesPago" method="POST" id="payment-form">
 		    <input type="hidden" name="token_id" id="token_id">
+			<input type="hidden" name="usu_id" id="usu_id" value="<?php echo $usu_id;?>">
 			<input type="hidden" name="nombre" id="nombre" value="<?php echo $nombre;?>">
 			<input type="hidden" name="email" id="email" value="<?php echo $email;?>">
 			<input type="hidden" name="telefono" id="telefono" value="<?php echo $telefono;?>">
 			<input type="hidden" name="precio_total" id="precio_total" value="<?php echo $precio_total;?>">
 			<input type="hidden" name="descripcion_pago" id="descripcion_pago" value="<?php echo $descripcion_pago;?>">
+			<input type="hidden" name="producto_id" id="producto_id" value="<?php echo $producto_id;?>">
+			<input type="hidden" name="item_id" id="item_id" value="<?php echo $item_id;?>">
+			<input type="hidden" name="p_d" id="p_d" value="<?php echo $p_d;?>">
+			<input type="hidden" name="p_i" id="p_i" value="<?php echo $p_i;?>">
+			<input type="hidden" name="importe" id="importe" value="<?php echo $importe;?>">
+			<input type="hidden" name="calle" id="calle" value="<?php echo $calle;?>">
+			<input type="hidden" name="noexterior" id="noexterior" value="<?php echo $noexterior;?>">
+			<input type="hidden" name="nointerior" id="nointerior" value="<?php echo $nointerior;?>">
+			<input type="hidden" name="pais" id="pais" value="<?php echo $pais;?>">
+			<input type="hidden" name="estado" id="estado" value="<?php echo $estado;?>">
+			<input type="hidden" name="municipio" id="municipio" value="<?php echo $municipio;?>">
+			<input type="hidden" name="colonia" id="colonia" value="<?php echo $colonia;?>">
+			<input type="hidden" name="cp" id="cp" value="<?php echo $cp;?>">
+			<input type="hidden" name="cantidad" id="cantidad" value="<?php echo $cantidad;?>">
 			<input type="hidden" name="use_card_points" id="use_card_points" value="false">
 		    <div class="pymnt-itm card  active" style="border-radius:16px; background:#f7f7f7;">
 			    <div class="card-header " style="background:#e8e8e8;">
