@@ -9,7 +9,9 @@
 
     $rfccorrecto=($_SESSION['requierefactura']==1 AND strlen($row_USER['rfc']) < 5)?'uk-hidden':'';
 
+    $usuario = $row_USER['id'];
     $desccc = $_SESSION['descuento'];
+    
 
     if ( $languaje == 'es') {
 
@@ -123,8 +125,8 @@
                 </p>
             </div>
 
-            <input type="hidden" name="usu_id" data-campo="usu_id" id="nombre" value="<?=$row_USER['id']?>" class="uk-input uk-input-grey">
-            <input type="hidden" name="cupon" data-campo="cupon" id="cupon" value="<?$desccc?>">
+            <input type="hidden" name="usu_id" data-campo="usu_id" id="nombre" value="<?=$usuario?>" class="uk-input uk-input-grey">
+            <input type="hidden" name="cupon" data-campo="cupon" id="cupon" value="<?=$desccc;?>">
 
             <div class="uk-child-width-1-2@m" uk-grid>
                 <div>
@@ -208,11 +210,25 @@
                         $subtotal=0;
                         $num=0;
                         $acuCantidad = 0;
+                        $random = rand(200000, 800000);
+                        $id_pedido = 0;
+
+                        $add_u = "INSERT INTO pedidost(`idmd5`) VALUES ('$random')";
+                            mysqli_query($CONEXION, $add_u);
+
+                            $con_datos = $CONEXION->query("SELECT id FROM pedidost WHERE `idmd5` = $random");
+                            $datos_r = $con_datos->fetch_assoc();
+                            $id_pedido = $datos_r['id'];
+
+                            $aux = $id_pedido;
                         
                         if(isset($_SESSION['carro'])) {
+                            
+
                             foreach ($arreglo as $key) {
                                 $itemId=$key['Id'];
                                 $acuCantidad += $key['Cantidad'];
+                                $cantidad = $key['Cantidad'];
                                 $CONSULTA0 = $CONEXION -> query("SELECT * FROM productosexistencias WHERE id = $itemId");
                                 $row_CONSULTA0 = $CONSULTA0 -> fetch_assoc();
                                 $prodId=$row_CONSULTA0['producto'];
@@ -249,10 +265,10 @@
                                 echo '<input type="hidden" name="producto_descripcion" id="producto_descripcion" value="'.$textDesc.'"/>';
                                 echo '<input type="hidden" name="precio_indv" id="precio_indv" value="'.$precio.'"/>';
                                 echo '<input type="hidden" name="importe" id="importe" value="'.$importe.'"/>';
+
                                
-                               
-                                // $sqlAx = "INSERT INTO pedidosdetalle (pedido,producto,item,productotxt,cantidad,precio,importe) VALUES ('$prodId', '$itemId', '$textDesc', '1', '$precio', '$importe')";
-                                // $subcategoria_query = $CONEXION->query($sqlAx);
+                                $sqlAx = "INSERT INTO pedidosdetallet(`pedido`, `producto`, `item`, `productotxt`, `cantidad`, `precio`, `importe`) VALUES ('$id_pedido', '$prodId', '$itemId', '$textDesc', '$cantidad', '$precio', '$importe')";
+                                $subcategoria_query = $CONEXION->query($sqlAx);
 
                                 echo '
                                     <tr>
@@ -291,6 +307,8 @@
 
                         echo '<input type="hidden" name="precio_total" id="precio_total" value="'.$total.'"/>';
                         echo '<input type="hidden" name="cantidad" id="cantidad" value="'.$cantidadP.'"/>';
+                        echo '<input type="hidden" name="id_pedido" data-campo="id_pedido" id="id_pedido" value="<?php echo $aux;?>">';
+                            echo '<br><br><br>'. $aux .'<br><br><br>';
 
                         if ($total>0) {
                             if ($shippingGlobal>0) {

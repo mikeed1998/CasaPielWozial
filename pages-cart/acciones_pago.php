@@ -3,13 +3,14 @@
 <body>
 
     <?php
+        $id_pedido = $_POST['id_pedido'];
         $usu_id = $_POST['usu_id'];
 		$nombre = $_POST['nombre'];
 		$email = $_POST['email'];
 		$telefono = $_POST['telefono'];
 		$precio_total = $_POST['precio_total'];
 		$descripcion_pago = $_POST['descripcion_pago'];
-		$descuento = $_SESSION['descuento'];
+		//$descuento = $_SESSION['descuento'];
 		$producto_id = $_POST['producto_id'];
 		$item_id = $_POST['item_id'];
 		// $p_d = $_POST['producto_descripcion'];
@@ -24,6 +25,8 @@
 		$colonia = $_POST['colonia'];
 		$cp = $_POST['cp'];
         $cantidad = $_POST['cantidad'];
+        $cupon = $_POST['cupon'];
+        $cupon_desc = $_POST['cupon_desc'];
 
         if(isset($_POST['token_id'])){
 
@@ -64,8 +67,9 @@
             $charge = $openpay->charges->create($chargeData);
         
             if($charge->status == "completed"){
-                $registrarPago = "INSERT INTO `pedidost`(`idmd5`, `uid`,     `nombre`,  `email`,  `estatus`,   `invisible`, `notify`, `guia`, `fecha`, `dom`, `factura`, `tabla`, `cantidad`,  `importe`,       `envio`, `comprobante`, `imagen`, `ipn`, `calle`, `noexterior`, `nointerior`, `entrecalles`, `pais`, `estado`, `municipio`, `colonia`, `cp`) 
-                                               VALUES   ('',      '$usu_id', '$nombre', '$email', '',          '',          '',       '',     '$ahora',      '',    '',        '',      '$cantidad', '$precio_total', '',      '',            '',       '',    '$calle','$noexterior','$nointerior','',            '$pais','$estado','$municipio','$colonia','$cp')";
+                // $registrarPago = "INSERT INTO `pedidost`(`idmd5`, `uid`,     `nombre`,  `email`,  `estatus`,   `invisible`, `notify`, `guia`, `fecha`,  `dom`, `factura`, `tabla`, `cantidad`,  `importe`,       `envio`, `comprobante`, `imagen`, `ipn`, `calle`,  `noexterior`,  `nointerior`,  `entrecalles`, `pais`,  `estado`,  `municipio`,  `colonia`,  `cp`, `cupon`,   `cupon_desc`) 
+                //                                VALUES   ('',      '$usu_id', '$nombre', '$email', '',          '',          '',       '',     '$ahora', '',    '',        '',      '$cantidad', '$precio_total', '',      '',            '',       '',    '$calle', '$noexterior', '$nointerior', '',            '$pais', '$estado', '$municipio', '$colonia', '$cp', '$cupon', '$cupon_desc')";                                             
+                $registrarPago = "UPDATE `pedidost` SET `uid` = '$usu_id', `nombre` = '$nombre',  `email` = '$email',  `fecha` = '$ahora', `cantidad` = '$cantidad',  `importe` = '$precio_total', `calle` = '$calle',  `noexterior` = '$noexterior',  `nointerior` = '$nointerior', `pais` = '$pais',  `estado` = '$estado',  `$municipio` = '$municipio', `colonia` = '$colonia',  `cp` = '$cp', `cupon` = '$cupon', `cupon_desc` = '$cupon_desc' WHERE `id` = '$id_pedido'"; 
                 // mysqli_query($CONEXION, $registrarPago) or die(mysqli_error($CONEXION));
                 
                 if (mysqli_query($CONEXION, $registrarPago)) {
