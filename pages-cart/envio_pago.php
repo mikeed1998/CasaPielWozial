@@ -211,19 +211,19 @@
                         $num=0;
                         $acuCantidad = 0;
                         $random = rand(200000, 800000);
-                        $id_pedido = 0;
+
 
                         $add_u = "INSERT INTO pedidost(`idmd5`) VALUES ('$random')";
                             mysqli_query($CONEXION, $add_u);
 
                             $con_datos = $CONEXION->query("SELECT id FROM pedidost WHERE `idmd5` = $random");
                             $datos_r = $con_datos->fetch_assoc();
-                            $id_pedido = $datos_r['id'];
-
-                            $aux = $id_pedido;
-                        
-                        if(isset($_SESSION['carro'])) {
+                            $id_pedido = intval($datos_r['id']);
                             
+                            echo '<input type="hidden" name="id_pedido" id="id_pedido" value="<?= $id_pedido?>">';
+                            echo '<br><br><br>'. $id_pedido .'<br><br><br>';
+                            
+                        if(isset($_SESSION['carro'])) {
 
                             foreach ($arreglo as $key) {
                                 $itemId=$key['Id'];
@@ -307,8 +307,7 @@
 
                         echo '<input type="hidden" name="precio_total" id="precio_total" value="'.$total.'"/>';
                         echo '<input type="hidden" name="cantidad" id="cantidad" value="'.$cantidadP.'"/>';
-                        echo '<input type="hidden" name="id_pedido" data-campo="id_pedido" id="id_pedido" value="<?php echo $aux;?>">';
-                            echo '<br><br><br>'. $aux .'<br><br><br>';
+                        
 
                         if ($total>0) {
                             if ($shippingGlobal>0) {

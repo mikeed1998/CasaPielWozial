@@ -11,6 +11,10 @@
 	</ul>
 </div>
 
+<div class="uk-width-1-1">
+	
+</div>
+
 
 <div class="uk-width-1-1">
 	<table class="uk-table uk-table-hover uk-table-striped uk-table-middle" id="myTable">
