@@ -220,7 +220,7 @@
                             $datos_r = $con_datos->fetch_assoc();
                             $id_pedido = intval($datos_r['id']);
                             
-                            echo '<input type="hidden" name="id_pedido" id="id_pedido" value="<?= $id_pedido?>">';
+                            echo '<input type="hidden" name="id_pedido" id="id_pedido" value="'.$id_pedido.'">';
                             echo '<br><br><br>'. $id_pedido .'<br><br><br>';
                             
                         if(isset($_SESSION['carro'])) {

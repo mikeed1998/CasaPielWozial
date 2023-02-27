@@ -7,7 +7,7 @@
 <body>
 <?=$header?>
 	<?php
-		$id_pedido = $_POST['id_pedido'];
+		$id_pedid = $_POST['id_pedido'];
 		$usu_id = $_POST['usu_id'];
 		$nombre = $_POST['nombre'];
 		$email = $_POST['email'];
