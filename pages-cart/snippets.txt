@@ -1,0 +1,61 @@
+snippets
+
+// eliminar cotizacion
+if(isset($_POST['idp'])){
+	require_once '../../../includes/connection.php';
+	$idP = $_POST['idp'];
+
+	$eliminacion = "DELETE FROM producto_cotizacion WHERE id_cotizacion = $idP";
+	if (mysqli_query($CONEXION, $eliminacion)) {
+		$eliminacion2 = "DELETE FROM cotizacion_personalizada WHERE id_cot_p = $idP";
+		if (mysqli_query($CONEXION, $eliminacion2)) {
+			echo "1";
+			  } else {
+			echo "0";		
+			  }
+  		} else {
+		echo "0";		
+  		}
+
+	
+}
+// eliminar cotizacion end
+
+
+
+//Eliminar registro
+function eliminarP(){
+
+	var nombre = document.getElementByid("nombre_f").value;
+	
+	//var URLactual = window.location.origin;
+	//var UrlAjax = URLactual+"/tiendaNaturista/includes/widgets.php";
+	var UrlAjax = "modulos/cotizacion2/acciones.php";
+		$.ajax({
+		url : UrlAjax,
+		type : 'POST',
+		dataType : 'html',
+		data : {idp: producto},
+	})
+	.done(function(resultado){
+		if(resultado == 1){
+		toastr["success"]("Cotizacion eliminada exitosamente", "Cotizacion eliminada");
+		setTimeout(function () { location.reload(); }, 2500);
+		}else{
+			toastr["error"]("Error eliminar ", "Fallo");
+		}
+
+	})
+    
+	}
+
+
+
+
+<!-- mensaje toatr -->
+<link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+	<script src="plugins/toastr/toastr.min.js" ></script>
+	<!-- mensaje toatr -->
+
+
+onclick="eliminarP()"

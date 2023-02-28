@@ -8,7 +8,6 @@
 </div>
 
 <?=$footer?>
-
 <?=$scriptGNRL?>
 
 </body>

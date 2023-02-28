@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js" ></script>
+
 <div class="uk-width-1-1 margen-top-20 uk-text-left">
 	<ul class="uk-breadcrumb">
 		<?php 
@@ -8,9 +11,13 @@
 	</ul>
 </div>
 
+<div class="uk-width-1-1">
+	
+</div>
+
 
 <div class="uk-width-1-1">
-	<table class="uk-table uk-table-hover uk-table-striped uk-table-middle" id="tablaproductos">
+	<table class="uk-table uk-table-hover uk-table-striped uk-table-middle" id="myTable">
 		<thead>
 			<tr class="uk-text-muted">
 				<td onclick="sortTable(0)">Id</td>
@@ -175,6 +182,11 @@ echo '
 
 <?php
 $scripts='
+$(document).ready( function () {
+    $(\'#myTable\').DataTable();
+
+} );
+
 $(function(){
 
 	$(".estatus").click(function(){

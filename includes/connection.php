@@ -85,6 +85,8 @@
 	// Metadatos
 		$CONSULTA          = $CONEXION -> query("SELECT * FROM configuracion WHERE id = 1");
 		$row_CONSULTA      = $CONSULTA -> fetch_assoc();
+		$desccc = 0;
+		
 
 		$title		       = $row_CONSULTA['title'];
 		$description       = $row_CONSULTA['description'];
@@ -95,7 +97,7 @@
 		$taxIVA            = (isset($_SESSION['requierefactura']) AND $_SESSION['requierefactura']==1)?$row_CONSULTA['iva']/100:0;
 		$aumementoPrecio   = 1+$row_CONSULTA['incremento']/100;
 		$prodsPagina       = $row_CONSULTA['prodspag'];
-		$shipping          = $row_CONSULTA['envio']*1;
+		$shipping          = ($row_CONSULTA['envio'] == '') ? '' : $row_CONSULTA['envio']*1;
 		$shippingGlobal    = $row_CONSULTA['envioglobal']*1;
 		$payPalCliente     = $row_CONSULTA['paypalemail'];
 		$sandbox           = ($payPalCliente=='business@efra.biz') ? 1:0;

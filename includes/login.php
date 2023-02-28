@@ -17,6 +17,7 @@
 	$passIncorrecto 	= 'Contraseña incorrecta';
 	$datosAcceso 		= 'Escriba sus datos de acceso';
 	$noExiste 			= 'No existe el usuario';
+	$salir              = 'Salir';
 
 	if ($languaje == 'en') {
 	   	$salir 			= 'Close';

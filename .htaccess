@@ -62,6 +62,16 @@ RewriteRule ^es/success$                        index.php?identificador=511&lang
 RewriteRule ^en/success$                        index.php?identificador=511&languaje=en
 RewriteRule ^es/(.*)\_IPN$                      index.php?identificador=512&idmd5=$1&languaje=es
 RewriteRule ^en/(.*)\_IPN$                      index.php?identificador=512&idmd5=$1&languaje=en
+RewriteRule ^es/ProcesoCompra$                  index.php?identificador=513&languaje=es
+RewriteRule ^en/ProcesoCompra$                  index.php?identificador=513&languaje=en
+RewriteRule ^es/EnvioPago$                      index.php?identificador=514&languaje=es
+RewriteRule ^en/EnvioPago$                      index.php?identificador=514&languaje=en
+RewriteRule ^es/Pagar$                          index.php?identificador=515&languaje=es
+RewriteRule ^en/Pagar$                          index.php?identificador=515&languaje=en
+RewriteRule ^en/AccionesPago$                   index.php?identificador=516&languaje=es
+RewriteRule ^es/AccionesPago$                   index.php?identificador=516&languaje=es
+RewriteRule ^es/OpcionPago$                     index.php?identificador=517&languaje=es
+RewriteRule ^en/OpcionPago$                     index.php?identificador=517&languaje=en
 
 RewriteRule ^es/Registro$                       index.php?identificador=900&languaje=es
 RewriteRule ^en/Registro$                       index.php?identificador=900&languaje=en

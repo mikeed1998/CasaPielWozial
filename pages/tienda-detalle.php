@@ -19,10 +19,10 @@
   if ($rowCONSULTA['precio']>0) {
     $precio = ($rowCONSULTA['descuento']>0)?'
     <del class="text-8 uk-text-light uk-text-muted">Precio: $'.number_format(($rowCONSULTA['precio']*$aumementoPrecio),2).'</del><br>
-    <div class="uk-card uk-card-default bg-primary uk-width-2-3@s uk-text-center" style="min-height: 35px; color:white; width: 250px;">
+    <div class="uk-card uk-card-default text-dark uk-width-2-3@s uk-text-center" style="min-height: 35px; color:white; width: 250px;">
       Precio: <span class="text-lg">'.number_format(($rowCONSULTA['precio']*$aumementoPrecio*(100-$rowCONSULTA['descuento'])/100),2).'</span>
     </div>':'
-    <div class="uk-card uk-card-default bg-primary uk-width-2-3@s uk-text-center" style="height: 35px; color:white; min-width: 250px; max-width: 250px;">
+    <div class="uk-card uk-card-default text-dark uk-width-2-3@s uk-text-center" style="height: 35px; color:white; min-width: 250px; max-width: 250px;">
       Precio: <span class="text-lg">'.number_format(($rowCONSULTA['precio']*$aumementoPrecio*(100-$rowCONSULTA['descuento'])/100),2).'</span>
     </div>';
   }

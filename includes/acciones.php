@@ -176,6 +176,51 @@
 		}
 	}
 
+	//    Cupones de descuento
+	if (isset($_POST['cuponaplicar'])) {
+		$cupon = htmlentities($_POST['cuponaplicar'], ENT_QUOTES);
+		$bandera = 0;
+		// $msjTxt .= '<br>llegamos';
+		// Comprobar si existe
+			$CONSULTA= $CONEXION -> query("SELECT * FROM cupones WHERE codigo = '$cupon'");
+			$numCupones=$CONSULTA->num_rows;
+			if ($numCupones>0) {
+				$bandera = 1;
+			}else{
+				$msjTxt .= '<br>No existe el cupón';
+			}
+
+		// Comprobar vigencia
+			if ($bandera==1){
+				$rowCONSULTA = $CONSULTA -> fetch_assoc();
+				if (strtotime($rowCONSULTA['vigencia'])<strtotime($hoy)){
+					$msjTxt .= '<br>No está vigente';
+				}else{
+					$bandera++;
+				}
+			}
+
+		// Comprobar estatus
+			if ($bandera==2){
+				if ($rowCONSULTA['estatus']==0){
+					$msjTxt .= '<br>Inactivo';
+				}else{
+					$bandera++;
+					$fallo=0;
+				}
+			}
+
+		// El cupón es válido
+			if ($fallo==0) {
+				$_SESSION['cupon'] = $cupon;
+				$msjClase = 'success';
+				$msjIcon  = 'check';
+				$msjTxt   = $rowCONSULTA['txt'];
+				$xtras    = $rowCONSULTA['descuento'];
+			}
+	}
+
+
 //    Regenerar contraseña               
 	if (isset($_POST['passrecovery'])) {
 		$email = $_POST['passrecovery'];

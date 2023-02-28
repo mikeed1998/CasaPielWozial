@@ -34,6 +34,11 @@ $subsecciones[] = array(
  'subseccion' => 'usuarios',
 	   'icon' => 'users');
 
+$subsecciones[] = array(
+	'title' => 'cupones',
+	'subseccion' => 'cupones',
+	'icon' => 'ticket-alt');
+
 
 echo '
 <div class="uk-width-auto@m margin-top-20">
