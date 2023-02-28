@@ -26,6 +26,14 @@
 		  	$manText = $inicioRow['texto3'];
 			$womanText = $inicioRow['texto4'];
 		}
+
+		$cone = $CONEXION->query("SELECT id FROM pedidost WHERE openpay = 0");
+		while($row = $cone->fetch_assoc()) {
+			$aux = $row['id'];
+			$subcone = $CONEXION->query("DELETE FROM pedidosdetallet WHERE pedido = $aux");
+		}
+
+		$eliminar = $CONEXION->query("DELETE FROM pedidost WHERE openpay = 0");
 		
 	?>  
 	<?=$header?>

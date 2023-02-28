@@ -1,3 +1,7 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+
 <?php
 $CONSULTA = $CONEXION -> query("SELECT * FROM pedidost WHERE id = $id");
 $row_CONSULTA = $CONSULTA -> fetch_assoc();
@@ -70,7 +74,40 @@ echo'
 		echo '</div>
 	</div>';
 
-
+echo '
+	<div class="uk-width-1-1">
+		<table class="table border">
+			<tr>
+				<td>Producto</td>
+				<td>Talla</td>
+				<td>Color</td>
+				<td>Cantidad</td>
+				<td>Precio lista</td>
+				<td>Precio final</td>
+				<td>Importe</td>
+			</tr>
+			
+				';
+				$subcons = $CONEXION->query("SELECT * FROM pedidosdetallet WHERE pedido = $id");
+				while($row_CONSULTA2 = $subcons->fetch_assoc()) {
+					$aux = explode('|', $row_CONSULTA2['productotxt']);
+					echo '
+						<tr>
+							<td>'. $aux[0] .' - '. $aux[1] .'</td>
+							<td>'. $aux[2] .'</td>
+							<td>'. $aux[3] .'</td>
+							<td>'. $row_CONSULTA2['cantidad'] .'</td>
+							<td>'. $row_CONSULTA2['precio'] .'</td>
+							<td>'. $row_CONSULTA2['importe'] .'</td>
+							<td>'. $row_CONSULTA2['importe'] .'</td>
+						</tr>
+					';
+				}
+				echo '
+			
+		</table>
+	</div>
+';
 
 
 $scripts='

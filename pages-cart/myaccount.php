@@ -32,7 +32,8 @@
     $entre          = 'Between';
     $envio          = 'Send to this address';
     $datosBanco 	= 'Datos para pago bancario';
-    $compras 		= 'Compras';
+    $compras 		= 'Compras por transferencia';
+	$compas2        = 'Compras con tajera';
     $contra 		= 'Contraseña';
     $verificarInfo  = 'Si alguna información no es correcta, modifíquela aquí y los cambios se guardarán automáticamente.';
     $cambiar 		= 'Cambiar';
@@ -85,7 +86,8 @@
 		$cpT 			= 'CP';
 
 	    $datosBanco 	= 'Data for bank payment';
-    	$compras 		= 'Shopping';
+    	$compras 		= 'Purchases by transfer';
+		$compras2       = 'Purchases by card';
     	$contra 		= 'Password';
     	$verificarInfo  = 'If any information is not correct, modify it here and the changes will be saved automatically.';
 	    $cambiar 		= 'Change';
@@ -330,7 +332,6 @@
 												<td>'.$fechaCuenta.'</td>
 												<td>'.$productosCuenta.'</td>
 												<td>'.$importeCuenta.'</td>
-												<td>'.$estatusCuenta.'</td>
 												<td>'.$cuentaCuenta.'</td>
 											</tr>
 										</thead>
@@ -355,7 +356,6 @@
 											<td><span class="uk-hidden@m uk-text-muted">'.$fechaCuenta.'</span>'.$fecha.'</td>
 											<td><span class="uk-hidden@m uk-text-muted">'.$productosCuenta.'</span>'.$numProds.'</td>
 											<td><span class="uk-hidden@m uk-text-muted">'.$importeCuenta.'</span>$'.number_format($row_CONSULTA['importe'],2).'</td>
-											<td><span class="uk-hidden@m uk-text-muted">'.$estatusCuenta.'</span>
 											
 											</td>
 											<td width="270px" class="uk-text-right">

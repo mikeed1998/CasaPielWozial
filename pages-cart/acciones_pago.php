@@ -3,6 +3,7 @@
 <body>
 
     <?php
+        $op = 0;
         $id_pedido = $_POST['id_pedido'];
         $usu_id = $_POST['usu_id'];
 		$nombre = $_POST['nombre'];
@@ -31,13 +32,13 @@
         if(isset($_POST['token_id'])){
 
             // require_once '../includes/connection.php';
-            require_once('C:\xampp7\htdocs\CasaPielWozial\includes\connection.php');
+            require_once('C:\xampp\htdocs\CasaPiel\includes\connection.php');
            
             //require_once '../library/Openpay3.3/Openpay.php';
             // $id_cot = $_POST['idcot'];
         
             // require(dirname(_FILE_) . '/../library/Openpay/Openpay.php');
-            require('C:\xampp7\htdocs\CasaPielWozial\library\Openpay\Openpay.php');
+            require('C:\xampp\htdocs\CasaPiel\library\Openpay\Openpay.php');
         
             $op = new Openpay\Data\Openpay();
             $MERCHANT_ID = $op->setId('mqq6zbbrv6kqpilztchv');
@@ -67,9 +68,10 @@
             $charge = $openpay->charges->create($chargeData);
         
             if($charge->status == "completed"){
+                $op = 1;
                 // $registrarPago = "INSERT INTO `pedidost`(`idmd5`, `uid`,     `nombre`,  `email`,  `estatus`,   `invisible`, `notify`, `guia`, `fecha`,  `dom`, `factura`, `tabla`, `cantidad`,  `importe`,       `envio`, `comprobante`, `imagen`, `ipn`, `calle`,  `noexterior`,  `nointerior`,  `entrecalles`, `pais`,  `estado`,  `municipio`,  `colonia`,  `cp`, `cupon`,   `cupon_desc`) 
                 //                                VALUES   ('',      '$usu_id', '$nombre', '$email', '',          '',          '',       '',     '$ahora', '',    '',        '',      '$cantidad', '$precio_total', '',      '',            '',       '',    '$calle', '$noexterior', '$nointerior', '',            '$pais', '$estado', '$municipio', '$colonia', '$cp', '$cupon', '$cupon_desc')";                                             
-                $registrarPago = "UPDATE `pedidost` SET `uid` = '$usu_id', `nombre` = '$nombre',  `email` = '$email', `estatus` = '2',  `fecha` = '$ahora', `cantidad` = '$cantidad',  `importe` = '$precio_total', `calle` = '$calle',  `noexterior` = '$noexterior',  `nointerior` = '$nointerior', `pais` = '$pais',  `estado` = '$estado',  `municipio` = '$municipio', `colonia` = '$colonia',  `cp` = '$cp', `cupon` = '$cupon', `cupon_desc` = '$cupon_desc' WHERE `id` = '$id_pedido'"; 
+                $registrarPago = "UPDATE `pedidost` SET `uid` = '$usu_id', `nombre` = '$nombre',  `email` = '$email', `estatus` = '2',  `fecha` = '$ahora', `cantidad` = '$cantidad',  `importe` = '$precio_total', `calle` = '$calle',  `noexterior` = '$noexterior',  `nointerior` = '$nointerior', `pais` = '$pais',  `estado` = '$estado',  `municipio` = '$municipio', `colonia` = '$colonia',  `cp` = '$cp', `cupon` = '$cupon', `cupon_desc` = '$cupon_desc', `openpay` = '$op' WHERE `id` = '$id_pedido'"; 
                 // mysqli_query($CONEXION, $registrarPago) or die(mysqli_error($CONEXION));
                 
                 if (mysqli_query($CONEXION, $registrarPago) or die(mysqli_error($CONEXION))) {

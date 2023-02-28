@@ -14,7 +14,7 @@
 	$username 		= 'casapiel_casapiel';
 	$password		= 'j$=Sn2J~,gUA';
 
-	$databaseLocal 	= 'casapiel2';
+	$databaseLocal 	= 'casapiel';
 	$usernameLocal 	= 'root';
 	$passwordLocal 	= '';
 
