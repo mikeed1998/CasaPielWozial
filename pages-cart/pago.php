@@ -33,7 +33,7 @@
 		$cupon_desc = $_POST['cupon']; 
 	?>
   
-    <?php
+    <!-- <?php
 		echo 'Pedido: '. $id_pedido .'<br>';
 		echo "ID: " . $usu_id . '<br>';
         echo 'Nombre: ' . $_POST['nombre'] . '<br>'; 
@@ -60,7 +60,7 @@
 		echo ($cupon == 1) ? 'Existe' : 'No existe';
 		echo ($cupon) ? ' y es del '. $cupon_desc .'% <br>' : ''; 
 		
-    ?>
+    ?> -->
 
     <div class="container py-5 d-flex justify-content-center">				
 		<form class="col-8" action="AccionesPago" method="POST" id="payment-form">

@@ -221,7 +221,7 @@
                             $id_pedido = intval($datos_r['id']);
                             
                             echo '<input type="hidden" name="id_pedido" id="id_pedido" value="'.$id_pedido.'">';
-                            echo '<br><br><br>'. $id_pedido .'<br><br><br>';
+                            // echo '<br><br><br>'. $id_pedido .'<br><br><br>';
                             
                         if(isset($_SESSION['carro'])) {
 
@@ -258,7 +258,7 @@
                                 $ejeFina1 = $row_USER['id'] .' * '.  $prodId .' * '. $itemId .' * '. $row_CONSULTA1['sku'].' | '.$row_CONSULTA1['titulo']. ' | ' . $talla.' | '.$colorName .' * '. $precio .' * '. $importe;
                                 $textDesc =$row_CONSULTA1['sku'].' | '.$row_CONSULTA1['titulo']. ' | ' . $talla.' | '.$colorName;
 
-                                echo $ejeFina1 . '<br>';
+                                // echo $ejeFina1 . '<br>';
 
                                 echo '<input type="hidden" name="producto_id" id="producto_id" value="'.$prodId.'"/>';
                                 echo '<input type="hidden" name="item_id" id="item_id" value="'.$itemId.'"/>';

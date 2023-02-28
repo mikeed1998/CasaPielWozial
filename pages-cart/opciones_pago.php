@@ -3,6 +3,14 @@
 <body>
 <?=$header?>
 
+    <?php
+        if($languaje == 'es') {
+
+        } else if($languaje == 'en') {
+
+        }
+    ?>
+
     <div class="container mt-5 mb-2 py-5 uk-text-center">
         <h1 class="uk-text-lead">Opciones de pago</h1>
         <div class="row mt-2 mb-2 py-4 text-center text-dark">

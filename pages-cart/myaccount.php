@@ -33,7 +33,7 @@
     $envio          = 'Send to this address';
     $datosBanco 	= 'Datos para pago bancario';
     $compras 		= 'Compras por transferencia';
-	$compas2        = 'Compras con tajera';
+	$compras2       = 'Compras con tajera';
     $contra 		= 'Contraseña';
     $verificarInfo  = 'Si alguna información no es correcta, modifíquela aquí y los cambios se guardarán automáticamente.';
     $cambiar 		= 'Cambiar';
@@ -200,7 +200,7 @@
 			<div class="uk-width-1-1 padding-v-50">
 				<ul uk-tab uk-switcher>
 					<li class="uk-active"><a href=""><?=$compras?></a></li>
-					<li class="uk-active"><a href=""><?=$compras?></a></li>
+					<li class="uk-active"><a href=""><?=$compras2?></a></li>
 					<li><a href=""><?=$domicilio?></a></li>
 					<li><a href=""><?=$contra?></a></li>
 				</ul>

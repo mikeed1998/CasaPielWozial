@@ -75,15 +75,17 @@
                 // mysqli_query($CONEXION, $registrarPago) or die(mysqli_error($CONEXION));
                 
                 if (mysqli_query($CONEXION, $registrarPago) or die(mysqli_error($CONEXION))) {
-                    echo '
-                        <div class="container mt-5 mb-5 py-5">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="alert alert-success"><strong>Success!</strong> Pago realizado con exito, regresando a la página principal.</div>
-                                </div>
-                            </div>
-                        </div>
-                    ';
+                    unset($_SESSION['carro']);
+                    include 'buySuccess.php';
+                    // echo '
+                    //     <div class="container mt-5 mb-5 py-5">
+                    //         <div class="row">
+                    //             <div class="col">
+                    //                 <div class="alert alert-success"><strong>Success!</strong> Pago realizado con exito, regresando a la página principal.</div>
+                    //             </div>
+                    //         </div>
+                    //     </div>
+                    // ';
                 } else {
                     echo "error";
                 }

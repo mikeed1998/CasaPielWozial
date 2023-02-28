@@ -24,6 +24,7 @@
 		$rutaPedido2        = 	$ruta.'ProcesoCompra';
 		$rutaCuidados		=	'cuidados';
 		$rutaContacto		=	'contacto';
+		$buysuccess         =   'BuySuccess';
 
 
 		if ($languaje == 'es') {
@@ -45,7 +46,7 @@
 			$derechosText = "TODOS LOS DERECHOS RESERVADOS";
 
 		}elseif ($languaje == 'en') {
-			
+			$menu0 = 'LOGIN';
 			$menu1 = 'HOME';
 			$menu2 = 'ABOUT';
 			$menu3 = 'PRODUCTS';
