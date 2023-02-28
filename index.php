@@ -296,6 +296,11 @@ switch ($identificador) {
 			include 'pages-cart/buySuccess.php';
 			break;
 
+		case 519:
+			include "includes/includes.php";
+			include 'pages-cart/detalleT.php';
+			break;
+
 
 	case 900:
 		include "includes/includes.php";

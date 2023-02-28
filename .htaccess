@@ -74,6 +74,8 @@ RewriteRule ^es/OpcionPago$                     index.php?identificador=517&lang
 RewriteRule ^en/OpcionPago$                     index.php?identificador=517&languaje=en
 RewriteRule ^es/BuySuccess$                     index.php?identificador=518&languaje=es
 RewriteRule ^en/BuySuccess$                     index.php?identificador=518&languaje=en
+RewriteRule ^es/detallet$                       index.php?identificador=519&languaje=es
+RewriteRule ^en/detallet$                       index.php?identificador=519&languaje=en
 
 
 RewriteRule ^es/Registro$                       index.php?identificador=900&languaje=es

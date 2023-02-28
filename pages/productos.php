@@ -214,82 +214,77 @@
 		</div-->
 	</div>
 </div>
-<div class="uk-container uk-container-large">
-	<div uk-grid style="margin-left: 0">
-		<!-- SECCION DE FILTROS LAT IZQ-->
-		<div class="uk-width-1-5@m uk-padding-small uk-sticky">
-			<div class="uk-cover-container uk-margin-top uk-visible@m">
-			    <img data-src="../img/design/logo.png" width="450" height="180" alt="" uk-img>
-			</div>
-			<div class="uk-padding-small">
-		    	<div class="custom-search uk-flex uk-flex-right uk-flex-middle">
-		        	<input class="uk-search-input search" type="search" placeholder="Search...">
-		    		<span class="uk-search-icon-flip" uk-search-icon></span>
-		    	</div>
-			</div>
-			<!--CATEGORIAS LATERAL IZQ-->
-			<div class="uk-padding">
-				<ul class="uk-nav uk-nav-parent-icon text-8" uk-nav>
-					<?php foreach ($categorias as $index => $value): 
-					
-					?>
-			        <li class="uk-parent">
-			        	<a class="uk-text-uppercase color-grisaceo negritas" href="<?= $value['id'].'_'.$value['txt'.$lng].'_productos'?>"><?=$value['txt'.$lng] ?></a>
-			        	<ul class="uk-nav-sub">
-							<li class="uk-text-uppercase color-grisaceo"><a href="<?= $value['id'].'_'.$value['txt'.$lng].'_producto'?>" style="text-color: black;"><?=$btnTodos?></a></li>
-							<li class="uk-text-uppercase color-grisaceo"><a class="uk-text-uppercase color-grisaceo" href="">Todos</a></li>
-			        		<?php  foreach ($value['subcategorias'] as $key => $val):  ?>
-				       			<li><a class="uk-text-uppercase color-grisaceo" href="<?=$val['id'].'_'.$val['txt'.$lng].'_productos' ?>"><?= $val['txt'.$lng] ?></a></li>
-				       		<?php endforeach ?>
-		       			</ul>
-		       		 </li>	
-		       		<?php endforeach?>
-			     </ul>
-			</div>
-			<!-- FILTROS-->
-			<div class="uk-padding-small text-8	">
-				<p style="border-bottom: 2px solid"><?php $filterText  ?></p>
-				<p><label><input class="uk-checkbox check-precio" type="checkbox" value="1"><?= $mayor ?> </label></p>	
-				<p><label><input class="uk-checkbox check-precio" type="checkbox" value="0"> <?= $menor ?></label></p>
-				<!--p><label><input class="uk-checkbox" type="checkbox"> COLOR</label></p>
-				<p><label><input class="uk-checkbox" type="checkbox"> TALLA</label></p-->
-			</div>
-		</div>
-		<!-- SECCION DE PRODUCTOS-->
-		<div class="uk-width-4-5@m">
-			<div class="uk-child-width-1-4@m" uk-grid>
-				<?php ;
-					
-					for ($i=0; $i < sizeof($productos) ; $i++):
-				 ?>
-				<div class="uk-padding-small">
-					<div class="uk-card uk-card-default uk-transition-toggle">
-						<a href="<?= $productos[$i]['id'].'_'.$productos[$i]['titulo'].'_item'?>">
-			            <div class="uk-card-media-top uk-flex uk-flex-center uk-padding-small">
-			            	<div class="uk-cover-container" style="width:200px; height: 220px;padding: 22px">
-			            		 <img src="<?= $productos[$i]['img'] ?>" alt="" uk-cover>
-			            	</div>
-			            </div>
-						
-				             <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-primary uk-text-center productos-overlay">
-			            		
-			            		<p class="uk-text-uppercase color-primary"><?= $bottonText ?></p>
-			            		<hr class="uk-divider-small">
-			            		<i class="fa fa-shopping-bag cartcount" aria-hidden="true"></i>
-
-				            </div>
-						
-			            <div class="uk-card-body uk-text-center padding-10 text-dark">
-		            	 	<hr class="uk-divider-small">
-		            		<p class="uk-text-uppercase negritas"><?= $productos[$i]['titulo'] ?></p>
-		                	<p> <?= $productos[$i]['precio'] ?></p>
-			            </div>
-			        	</a>
-			        </div>
+	<div class="uk-container uk-container-large">
+		<div uk-grid style="margin-left: 0">
+			<!-- SECCION DE FILTROS LAT IZQ-->
+			<div class="uk-width-1-5@m uk-padding-small uk-sticky">
+				<div class="uk-cover-container uk-margin-top uk-visible@m">
+			    	<img data-src="../img/design/logo.png" width="450" height="180" alt="" uk-img>
 				</div>
-				<?php endfor ?>
-				
+				<div class="uk-padding-small">
+		    		<div class="custom-search uk-flex uk-flex-right uk-flex-middle">
+		        		<input class="uk-search-input search" type="search" placeholder="Search...">
+			    		<span class="uk-search-icon-flip" uk-search-icon></span>
+			    	</div>
+				</div>
+				<!--CATEGORIAS LATERAL IZQ-->
+				<div class="uk-padding">
+					<ul class="uk-nav uk-nav-parent-icon text-8" uk-nav>
+						<?php foreach ($categorias as $index => $value): 
+						?>
+			        	<li class="uk-parent">
+			        		<a class="uk-text-uppercase color-grisaceo negritas" href="<?= $value['id'].'_'.$value['txt'.$lng].'_productos'?>"><?=$value['txt'.$lng] ?></a>
+				        	<ul class="uk-nav-sub">
+								<li class="uk-text-uppercase color-grisaceo"><a class="color-grisaceo" href="<?=$value['id'].'_'.$value['txt'.$lng].'_todos_productos'?>" style="text-color: black; text-decoration: none;"><?=$btnTodos?></a></li>
+			        			<?php  foreach ($value['subcategorias'] as $key => $val):  ?>
+				       				<li><a class="uk-text-uppercase color-grisaceo" href="<?=$val['id'].'_'.$val['txt'.$lng].'_productos' ?>"><?= $val['txt'.$lng] ?></a></li>
+				       			<?php endforeach ?>
+			       			</ul>
+			       		 </li>	
+			       		<?php endforeach?>
+				     </ul>
+				</div>
+				<!-- FILTROS-->
+				<div class="uk-padding-small text-8	">
+					<p style="border-bottom: 2px solid"><?php $filterText  ?></p>
+					<p><label><input class="uk-checkbox check-precio" type="checkbox" value="1"><?= $mayor ?> </label></p>	
+					<p><label><input class="uk-checkbox check-precio" type="checkbox" value="0"> <?= $menor ?></label></p>
+					<!--p><label><input class="uk-checkbox" type="checkbox"> COLOR</label></p>
+					<p><label><input class="uk-checkbox" type="checkbox"> TALLA</label></p-->
+				</div>
 			</div>
+			<!-- SECCION DE PRODUCTOS-->
+			<div class="uk-width-4-5@m">
+				<div class="uk-child-width-1-4@m" uk-grid>
+					<?php ;	
+						for ($i=0; $i < sizeof($productos) ; $i++):
+					 ?>
+					<div class="uk-padding-small">
+						<div class="uk-card uk-card-default uk-transition-toggle">
+							<a href="<?= $productos[$i]['id'].'_'.$productos[$i]['titulo'].'_item'?>">
+				            	<div class="uk-card-media-top uk-flex uk-flex-center uk-padding-small">
+				            		<div class="uk-cover-container" style="width:200px; height: 220px;padding: 22px">
+			    	        			 <img src="<?= $productos[$i]['img'] ?>" alt="" uk-cover>
+			        		    	</div>
+			            		</div>
+						
+				            	 <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-primary uk-text-center productos-overlay">
+			            			<p class="uk-text-uppercase color-primary"><?= $bottonText ?></p>
+			        	    		<hr class="uk-divider-small">
+			            			<i class="fa fa-shopping-bag cartcount" aria-hidden="true"></i>
+				            	</div>
+						
+				     	       <div class="uk-card-body uk-text-center padding-10 text-dark">
+		        	    		 	<hr class="uk-divider-small">
+		            				<p class="uk-text-uppercase negritas"><?= $productos[$i]['titulo'] ?></p>
+		                			<p> <?= $productos[$i]['precio'] ?></p>
+				    	        </div>
+			    	    	</a>
+				        </div>
+					</div>
+				<?php endfor ?>		
+			</div>
+
 			<?php if(!sizeof($productos)): ?>
 					
 					<div class="uk-alert-danger uk-padding-large uk-text-center" uk-alert>

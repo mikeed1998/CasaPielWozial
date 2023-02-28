@@ -292,7 +292,7 @@
 												'.$guia.'
 												<a href="'.$row_CONSULTA['idmd5'].'_por_pagar" class="'.$clasePagar.' uk-button uk-button-small uk-button-primary">PayPal</a>
 												<button class="borrarpedido uk-button uk-button-small uk-button-danger" data-id="'.$pedido.'">'.$borrarCuenta.'</button>
-												<a href="'.$row_CONSULTA['idmd5'].'_detalle" class="uk-button uk-button-small uk-button-default">'.$detalles.'</a>	
+												<a href="'.$row_CONSULTA['idmd5'].'_detalle" class="uk-button uk-button-small uk-button-default">'.$detalles.'</a>			
 											</td>
 										</tr>
 									';
@@ -360,7 +360,10 @@
 											</td>
 											<td width="270px" class="uk-text-right">
 												<button class="borrarpedido uk-button uk-button-small uk-button-danger" data-id="'.$pedido.'">'.$borrarCuenta.'</button>
-												<a href="'.$row_CONSULTA['id'].'_detalle" class="uk-button uk-button-small uk-button-default">'.$detalles.'</a>	
+												<form action="detallet" mehtod="post">
+													<input type="hidden" name="id" id="id" value="'. $row_CONSULTA['id'] .'"/>
+													<input type="submit" class="uk-button uk-button-small uk-button-default" value="'. $detalles .'"/>
+												</form>			
 											</td>
 										</tr>
 									';
