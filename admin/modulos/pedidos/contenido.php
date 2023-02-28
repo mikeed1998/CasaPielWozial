@@ -1,5 +1,8 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js" ></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
 
 <div class="uk-width-1-1 margen-top-20 uk-text-left">
 	<ul class="uk-breadcrumb">
@@ -11,12 +14,17 @@
 	</ul>
 </div>
 
-<div class="uk-width-1-1">
-	
+
+<div class="container">
+	<div class="row">
+		<div class="col-6 text-end"><button class="pago1 btn btn-outline border border-dark">Pagos con deposito</button></div>
+		<div class="col-6 text-start"><button class="pago2 btn btn-outline border border-dark">Pagos con tarjeta</button></div>
+	</div>
 </div>
 
 
-<div class="uk-width-1-1">
+
+<div class="uk-width-1-1" id="tabla1">
 	<table class="uk-table uk-table-hover uk-table-striped uk-table-middle" id="myTable">
 		<thead>
 			<tr class="uk-text-muted">
@@ -179,6 +187,99 @@ echo '
 	</div>
 </div>
 
+<div class="uk-width-1-1" id="tabla2">
+	<table class="uk-table uk-table-hover uk-table-striped uk-table-middle" id="myTable2">
+		<thead>
+			<tr class="uk-text-muted">
+				<td onclick="sortTable(0)">Id</td>
+				<td onclick="sortTable(1)" class="uk-text-center">Fecha</td>
+				<td onclick="sortTable(2)">Nombre/Email</td>
+				<td onclick="sortTable(3)" class="uk-text-center">Productos</td>
+				<td onclick="sortTable(4)" class="uk-text-center">Importe</td>
+				<td width="240px;"></td>
+			</tr>
+		</thead>
+		<tbody>
+
+		<?php 
+		$CONSULTA = $CONEXION -> query("SELECT * FROM pedidost ORDER BY id DESC");
+		while($row_CONSULTA = $CONSULTA -> fetch_assoc()){
+			$thisid=$row_CONSULTA['id'];
+			$user=$row_CONSULTA['uid'];
+
+
+			$CONSULTA1 = $CONEXION -> query("SELECT SUM(cantidad) AS cant FROM pedidosdetallet WHERE pedido = $thisid");
+			$row_CONSULTA1 = $CONSULTA1 -> fetch_assoc();
+			$numProds=$row_CONSULTA1['cant'];
+
+			$segundos=strtotime($row_CONSULTA['fecha']);
+			$fecha=date('d-m-Y',$segundos);
+
+			$level=$row_CONSULTA['estatus']+1;
+
+			switch ($level) {
+				case 2:
+					$clase='uk-button-primary';
+					break;
+				case 3:
+					$clase='uk-button-warning';
+					break;
+				case 4:
+					$clase='uk-button-success';
+					break;
+				default:
+					$clase='uk-button-white';
+					break;
+			}
+
+			echo '
+			<tr>
+				<td>
+					'.$row_CONSULTA['id'].'
+				</td>
+				<td class="uk-text-center">
+					<span class="uk-hidden">'.$row_CONSULTA['fecha'].'</span>
+					'.$fecha.'
+				</td>
+				<td>
+					'.$row_CONSULTA['nombre'].'<br>
+					'.$row_CONSULTA['email'].'
+				</td>
+				<td class="uk-text-center">
+					'.$numProds.'
+				</td>
+				<td class="uk-text-center">
+					<span class="uk-hidden">'.($row_CONSULTA['importe']+1000000000).'</span>
+					$'.number_format($row_CONSULTA['importe'],2).'
+				</td>
+				<td class="uk-text-center">
+					<a href="index.php?seccion='.$seccion.'&subseccion=detalle2&id='.$row_CONSULTA['id'].'" class="uk-icon-button uk-button-primary"><i class="fas fa-search-plus"></i></a>  &nbsp;
+					<a class="uk-icon-button uk-button-white" href="../'.$row_CONSULTA['idmd5'].'_revisar.pdf" target="_blank"><i class="far fa-file-pdf"></i></a> &nbsp;
+					<button class="estatus '.$clase.' uk-icon-button text-gnrl" data-id="'.$row_CONSULTA['id'].'">'.$level.'</button> &nbsp;
+					<a href="#eliminarpedidosmodal" uk-toggle data-id="'.$row_CONSULTA['id'].'"  class="eliminarpedidosrow uk-icon-button uk-button-danger" uk-icon="icon:trash"></a>
+				</td>
+			</tr>';
+		}
+		?>
+
+		</tbody>
+	</table>
+	<div class="uk-grid">
+		<div class="uk-width-1-4">
+			<button class="uk-button uk-button-white">1</button> Registrado
+		</div>
+		<div class="uk-width-1-4">
+			<button class="uk-button uk-button-primary">2</button> Pagado
+		</div>
+		<div class="uk-width-1-4">
+			<button class="uk-button uk-button-warning">3</button> Enviado
+		</div>
+		<div class="uk-width-1-4">
+			<button class="uk-button uk-button-success">4</button> Entregado
+		</div>
+	</div>
+</div>
+
 
 <?php
 $scripts='
@@ -186,6 +287,19 @@ $(document).ready( function () {
     $(\'#myTable\').DataTable();
 
 } );
+
+$(document).ready( function () {
+    $(\'#myTable2\').DataTable();
+
+} );
+
+$(".pago1").click(function(){
+	$("#tabla1").toggle();
+});
+
+$(".pago2").click(function(){
+	$("#tabla2").toggle();
+});
 
 $(function(){
 

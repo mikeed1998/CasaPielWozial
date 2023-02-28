@@ -198,6 +198,7 @@
 			<div class="uk-width-1-1 padding-v-50">
 				<ul uk-tab uk-switcher>
 					<li class="uk-active"><a href=""><?=$compras?></a></li>
+					<li class="uk-active"><a href=""><?=$compras?></a></li>
 					<li><a href=""><?=$domicilio?></a></li>
 					<li><a href=""><?=$contra?></a></li>
 				</ul>
@@ -308,6 +309,78 @@
 							</table>
 							';
 						}
+						?>
+					</li>
+					<li>
+						<?php
+							$CONSULTA = $CONEXION -> query("SELECT * FROM pedidost WHERE uid = $uid ORDER BY id DESC");
+							$numPedidos=$CONSULTA->num_rows;
+				
+							if ($numPedidos==0) {
+								echo '
+									<div uk-alert class="uk-alert-danger uk-text-center">
+										'.$sinPedidos.'
+									</div>';
+							}else{
+								echo '
+									<table class="uk-table uk-table-striped uk-table-hover uk-table-middle uk-table-responsive uk-text-center">
+										<thead>
+											<tr>
+												<td>'.$ordenNum.'</td>
+												<td>'.$fechaCuenta.'</td>
+												<td>'.$productosCuenta.'</td>
+												<td>'.$importeCuenta.'</td>
+												<td>'.$estatusCuenta.'</td>
+												<td>'.$cuentaCuenta.'</td>
+											</tr>
+										</thead>
+									<tbody>
+								';
+						
+								while($row_CONSULTA = $CONSULTA -> fetch_assoc()){
+									$pedido=$row_CONSULTA['id'];
+									$segundos=strtotime($row_CONSULTA['fecha']);
+									$fecha=date('d-m-Y',$segundos);
+								
+									$numProds=0;
+									$CONSULTA1 = $CONEXION -> query("SELECT * FROM pedidosdetallet WHERE pedido = $pedido");
+					
+									while($row_CONSULTA1 = $CONSULTA1 -> fetch_assoc()){
+										$numProds+=$row_CONSULTA1['cantidad'];
+									}
+						
+									echo '
+										<tr id="pedido'.$pedido.'">
+											<td><span class="uk-hidden@m uk-text-muted">'.$ordenNum.'</span>'.$pedido.'</td>
+											<td><span class="uk-hidden@m uk-text-muted">'.$fechaCuenta.'</span>'.$fecha.'</td>
+											<td><span class="uk-hidden@m uk-text-muted">'.$productosCuenta.'</span>'.$numProds.'</td>
+											<td><span class="uk-hidden@m uk-text-muted">'.$importeCuenta.'</span>$'.number_format($row_CONSULTA['importe'],2).'</td>
+											<td><span class="uk-hidden@m uk-text-muted">'.$estatusCuenta.'</span>
+											
+											</td>
+											<td width="270px" class="uk-text-right">
+												<button class="borrarpedido uk-button uk-button-small uk-button-danger" data-id="'.$pedido.'">'.$borrarCuenta.'</button>
+												<a href="'.$row_CONSULTA['id'].'_detalle" class="uk-button uk-button-small uk-button-default">'.$detalles.'</a>	
+											</td>
+										</tr>
+									';
+
+									$CONSULTA1 = $CONEXION -> query("SELECT * FROM pedidosdetallet WHERE pedido = $pedido");
+					
+									while($row_CONSULTA1 = $CONSULTA1 -> fetch_assoc()){
+										$link=$row_CONSULTA1['producto'].'_'.urlencode(str_replace($caracteres_no_validos,$caracteres_si_validos,html_entity_decode(strtolower($row_CONSULTA1['productotxt'])))).'_.html';								
+									}
+					
+									mysqli_free_result($CONSULTA1);
+								}
+		
+								mysqli_free_result($CONSULTA);
+			
+								echo '
+									</tbody>
+								</table>
+								';
+							}
 						?>
 					</li>
 					<!-- Domicilios -->
